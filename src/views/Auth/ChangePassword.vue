@@ -1,26 +1,23 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import {
-  LockClosedIcon,
-  CheckCircleIcon,
-  ShieldCheckIcon,
-  ArrowLeftIcon,
-  EyeIcon,
-  EyeSlashIcon,
-} from '@heroicons/vue/24/outline'
+import { LockClosedIcon, CheckCircleIcon, ShieldCheckIcon, ArrowLeftIcon } from '@heroicons/vue/24/outline'
 import { CheckCircleIcon as CheckCircleSolidIcon } from '@heroicons/vue/24/solid'
 import AuthLayout from '@/layouts/AuthLayout.vue'
 import AuthCard from '@/components/Auth/AuthCard.vue'
+import AuthTextField from '@/components/Auth/AuthTextField.vue'
+import AuthPrimaryButton from '@/components/Auth/AuthPrimaryButton.vue'
+import AuthSecondaryButton from '@/components/Auth/AuthSecondaryButton.vue'
+import AuthErrorBanner from '@/components/Auth/AuthErrorBanner.vue'
 import { useAuth } from '@/composables/useAuth'
+import { useTheme } from '@/composables/useTheme'
 
 const router = useRouter()
 const { isLoading, errorMessage, changePassword } = useAuth()
+const { isDark } = useTheme()
 
 const newPassword = ref('')
 const confirmNewPassword = ref('')
-const showNewPassword = ref(false)
-const showConfirmPassword = ref(false)
 
 const strengthScore = computed(() => {
   let score = 0
@@ -43,10 +40,7 @@ const filledSegments = computed(() => Math.max(strengthScore.value, newPassword.
 
 async function handleSubmit() {
   try {
-    await changePassword({
-      newPassword: newPassword.value,
-      confirmNewPassword: confirmNewPassword.value,
-    })
+    await changePassword({ newPassword: newPassword.value, confirmNewPassword: confirmNewPassword.value })
     router.push('/login')
   } catch {
     // errorMessage sudah diisi di dalam useAuth
@@ -56,7 +50,6 @@ async function handleSubmit() {
 
 <template>
   <AuthLayout :show-stats="false">
-    <!-- Headline dengan sebagian teks berwarna -->
     <template #brand-title>
       Buat Kata Sandi Baru<br />
       untuk Akun Anda<br />
@@ -69,10 +62,8 @@ async function handleSubmit() {
       </p>
     </template>
 
-
     <template #brand-illustration>
       <div class="relative h-72 mt-4">
-
         <div class="absolute bottom-0 left-16 w-56 h-20 bg-purple-600/40 rounded-full blur-3xl"></div>
 
         <div class="absolute left-4 top-4 w-44 h-52">
@@ -127,114 +118,70 @@ async function handleSubmit() {
       </template>
 
       <form class="space-y-5" @submit.prevent="handleSubmit">
-
-        <p
-          v-if="errorMessage"
-          class="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-2"
-        >
-          {{ errorMessage }}
-        </p>
+        <AuthErrorBanner :message="errorMessage" />
 
         <div>
-          <label for="new-password" class="block text-sm text-white mb-2">Kata Sandi Baru</label>
-          <div class="relative">
-            <LockClosedIcon class="w-5 h-5 text-gray-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
-            <input
-              id="new-password"
-              v-model="newPassword"
-              :type="showNewPassword ? 'text' : 'password'"
-              autocomplete="new-password"
-              placeholder="Masukkan kata sandi baru"
-              required
-              class="w-full bg-[#181428]/80 border border-white/10 rounded-xl py-3 pl-11 pr-11 text-white text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/60 focus:border-transparent transition"
-            />
-            <button
-              type="button"
-              class="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition"
-              @click="showNewPassword = !showNewPassword"
-              :aria-label="showNewPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'"
-            >
-              <EyeSlashIcon v-if="showNewPassword" class="w-5 h-5" />
-              <EyeIcon v-else class="w-5 h-5" />
-            </button>
-          </div>
+          <AuthTextField
+            id="new-password"
+            v-model="newPassword"
+            label="Kata Sandi Baru"
+            autocomplete="new-password"
+            placeholder="Masukkan kata sandi baru"
+            :icon="LockClosedIcon"
+            revealable
+          />
 
           <div class="flex items-center gap-3 mt-3">
-            <span class="text-xs text-gray-400">Kekuatan Kata Sandi:</span>
+            <span class="text-xs" :class="isDark ? 'text-gray-400' : 'text-gray-500'">Kekuatan Kata Sandi:</span>
             <span class="text-xs font-medium" :class="strengthMeta.color">{{ strengthMeta.label }}</span>
             <div class="flex gap-1 flex-1">
               <div
                 v-for="i in 4"
                 :key="i"
                 class="h-1.5 flex-1 rounded-full"
-                :class="i <= filledSegments ? strengthMeta.bar : 'bg-white/10'"
+                :class="i <= filledSegments ? strengthMeta.bar : (isDark ? 'bg-white/10' : 'bg-gray-200')"
               ></div>
             </div>
           </div>
         </div>
 
-        <div>
-          <label for="confirm-new-password" class="block text-sm text-white mb-2">Konfirmasi Kata Sandi Baru</label>
-          <div class="relative">
-            <LockClosedIcon class="w-5 h-5 text-gray-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
-            <input
-              id="confirm-new-password"
-              v-model="confirmNewPassword"
-              :type="showConfirmPassword ? 'text' : 'password'"
-              autocomplete="new-password"
-              placeholder="Masukkan ulang kata sandi baru"
-              required
-              class="w-full bg-[#181428]/80 border border-white/10 rounded-xl py-3 pl-11 pr-11 text-white text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/60 focus:border-transparent transition"
-            />
-            <button
-              type="button"
-              class="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition"
-              @click="showConfirmPassword = !showConfirmPassword"
-              :aria-label="showConfirmPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'"
-            >
-              <EyeSlashIcon v-if="showConfirmPassword" class="w-5 h-5" />
-              <EyeIcon v-else class="w-5 h-5" />
-            </button>
-          </div>
-        </div>
+        <AuthTextField
+          id="confirm-new-password"
+          v-model="confirmNewPassword"
+          label="Konfirmasi Kata Sandi Baru"
+          autocomplete="new-password"
+          placeholder="Masukkan ulang kata sandi baru"
+          :icon="LockClosedIcon"
+          revealable
+        />
 
-        <div class="rounded-xl bg-purple-500/5 border border-purple-500/20 p-4">
-          <p class="flex items-center gap-2 text-sm text-white font-medium mb-3">
+        <div class="rounded-xl border p-4" :class="isDark ? 'bg-purple-500/5 border-purple-500/20' : 'bg-purple-50 border-purple-200'">
+          <p class="flex items-center gap-2 text-sm font-medium mb-3" :class="isDark ? 'text-white' : 'text-gray-900'">
             <ShieldCheckIcon class="w-4 h-4 text-purple-400" />
             Tips membuat kata sandi yang kuat:
           </p>
           <ul class="space-y-2">
-            <li class="flex items-center gap-2 text-sm text-gray-300">
+            <li class="flex items-center gap-2 text-sm" :class="isDark ? 'text-gray-300' : 'text-gray-600'">
               <CheckCircleIcon class="w-4 h-4 text-purple-400 flex-shrink-0" />
               Minimal 8 karakter
             </li>
-            <li class="flex items-center gap-2 text-sm text-gray-300">
+            <li class="flex items-center gap-2 text-sm" :class="isDark ? 'text-gray-300' : 'text-gray-600'">
               <CheckCircleIcon class="w-4 h-4 text-purple-400 flex-shrink-0" />
               Gunakan kombinasi huruf besar, huruf kecil, angka, dan simbol
             </li>
-            <li class="flex items-center gap-2 text-sm text-gray-300">
+            <li class="flex items-center gap-2 text-sm" :class="isDark ? 'text-gray-300' : 'text-gray-600'">
               <CheckCircleIcon class="w-4 h-4 text-purple-400 flex-shrink-0" />
               Hindari informasi pribadi atau kata yang mudah ditebak
             </li>
           </ul>
         </div>
 
-        <!-- Tombol Simpan -->
-        <button
-          type="submit"
-          :disabled="isLoading"
-          class="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-medium text-sm shadow-lg shadow-purple-900/40 transition"
-        >
-          {{ isLoading ? 'Menyimpan...' : 'Simpan Kata Sandi Baru' }}
-        </button>
+        <AuthPrimaryButton :loading="isLoading" loading-text="Menyimpan...">Simpan Kata Sandi Baru</AuthPrimaryButton>
       </form>
 
       <template #footer>
         <div class="text-center mt-5">
-          <router-link
-            to="/login"
-            class="inline-flex items-center gap-2 text-sm text-purple-400 hover:text-purple-300 transition"
-          >
+          <router-link to="/login" class="inline-flex items-center gap-2 text-sm text-purple-400 hover:text-purple-300 transition">
             <ArrowLeftIcon class="w-4 h-4" />
             Kembali ke Halaman Login
           </router-link>

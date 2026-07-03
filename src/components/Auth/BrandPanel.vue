@@ -4,6 +4,7 @@ import {
   ChartPieIcon,
   ArrowTrendingUpIcon,
 } from '@heroicons/vue/24/outline'
+import { useTheme } from '@/composables/useTheme'
 
 defineProps({
   title: {
@@ -20,6 +21,8 @@ defineProps({
     default: true,
   },
 })
+
+const { isDark } = useTheme()
 </script>
 
 <template>
@@ -33,16 +36,16 @@ defineProps({
         <span class="text-white font-bold text-lg">L</span>
       </div>
       <div>
-        <p class="text-white font-semibold tracking-[0.2em] text-lg leading-none">LUMINA</p>
-        <p class="text-gray-400 text-[11px] tracking-[0.3em] mt-1">FINANCE</p>
+        <p class="font-semibold tracking-[0.2em] text-lg leading-none" :class="isDark ? 'text-white' : 'text-gray-900'">LUMINA</p>
+        <p class="text-[11px] tracking-[0.3em] mt-1" :class="isDark ? 'text-gray-400' : 'text-gray-500'">FINANCE</p>
       </div>
     </div>
 
     <!-- Headline: default rendering dari prop `title`, atau override lewat slot #title untuk markup kustom (mis. sebagian teks berwarna) -->
-    <h1 class="relative text-4xl font-bold text-white leading-tight mb-5 whitespace-pre-line">
+    <h1 class="relative text-4xl font-bold leading-tight mb-5 whitespace-pre-line" :class="isDark ? 'text-white' : 'text-gray-900'">
       <slot name="title">{{ title }}</slot>
     </h1>
-    <p class="relative text-gray-400 text-base leading-relaxed max-w-md mb-8">
+    <p class="relative text-base leading-relaxed max-w-md mb-8" :class="isDark ? 'text-gray-400' : 'text-gray-600'">
       {{ description }}
     </p>
 
@@ -58,9 +61,9 @@ defineProps({
         <div class="absolute bottom-0 left-24 w-40 h-16 bg-purple-600/40 rounded-full blur-2xl"></div>
 
         <!-- Kartu Total Aset -->
-        <div class="absolute left-0 top-0 w-52 rounded-2xl bg-[#12101c]/90 border border-white/10 backdrop-blur-sm p-4 shadow-xl">
-          <p class="text-gray-400 text-xs mb-1">Total Aset</p>
-          <p class="text-white font-semibold text-lg">Rp 56.750.000.000</p>
+        <div class="absolute left-0 top-0 w-52 rounded-2xl border backdrop-blur-sm p-4 shadow-xl" :class="isDark ? 'bg-[#12101c]/90 border-white/10' : 'bg-white border-gray-200'">
+          <p class="text-xs mb-1" :class="isDark ? 'text-gray-400' : 'text-gray-500'">Total Aset</p>
+          <p class="font-semibold text-lg" :class="isDark ? 'text-white' : 'text-gray-900'">Rp 56.750.000.000</p>
           <p class="text-emerald-400 text-xs flex items-center gap-1 mt-1">
             <ArrowTrendingUpIcon class="w-3.5 h-3.5" />
             8.6% dari periode lalu
@@ -68,8 +71,8 @@ defineProps({
         </div>
 
         <!-- Kartu Grafik -->
-        <div class="absolute right-0 top-8 w-44 h-36 rounded-2xl bg-[#12101c]/90 border border-white/10 backdrop-blur-sm p-4 shadow-xl flex flex-col gap-3">
-          <div class="h-2 w-16 rounded bg-white/10"></div>
+        <div class="absolute right-0 top-8 w-44 h-36 rounded-2xl border backdrop-blur-sm p-4 shadow-xl flex flex-col gap-3" :class="isDark ? 'bg-[#12101c]/90 border-white/10' : 'bg-white border-gray-200'">
+          <div class="h-2 w-16 rounded" :class="isDark ? 'bg-white/10' : 'bg-gray-200'"></div>
           <div class="flex items-end gap-4 flex-1">
             <div class="w-10 h-10 rounded-full border-[6px] border-purple-500/70" style="border-right-color:#f472b6;border-bottom-color:#f472b6;"></div>
             <div class="flex items-end gap-1.5 flex-1 h-16">
@@ -81,8 +84,8 @@ defineProps({
         </div>
 
         <!-- Kartu tren garis -->
-        <div class="absolute left-14 bottom-4 w-52 h-28 rounded-2xl bg-[#12101c]/90 border border-white/10 backdrop-blur-sm p-4 shadow-xl">
-          <div class="h-2 w-20 rounded bg-white/10 mb-3"></div>
+        <div class="absolute left-14 bottom-4 w-52 h-28 rounded-2xl border backdrop-blur-sm p-4 shadow-xl" :class="isDark ? 'bg-[#12101c]/90 border-white/10' : 'bg-white border-gray-200'">
+          <div class="h-2 w-20 rounded mb-3" :class="isDark ? 'bg-white/10' : 'bg-gray-200'"></div>
           <svg viewBox="0 0 160 50" class="w-full h-12">
             <polyline
               points="0,35 20,25 40,32 60,15 80,22 100,8 120,18 140,4 160,10"
@@ -103,12 +106,12 @@ defineProps({
         </div>
 
         <!-- Kartu shield -->
-        <div class="absolute left-0 bottom-0 w-16 h-16 rounded-2xl bg-[#12101c]/90 border border-white/10 backdrop-blur-sm flex items-center justify-center shadow-xl">
+        <div class="absolute left-0 bottom-0 w-16 h-16 rounded-2xl border backdrop-blur-sm flex items-center justify-center shadow-xl" :class="isDark ? 'bg-[#12101c]/90 border-white/10' : 'bg-white border-gray-200'">
           <ShieldCheckIcon class="w-7 h-7 text-purple-400" />
         </div>
 
         <!-- Kartu pie -->
-        <div class="absolute right-4 bottom-0 w-16 h-16 rounded-2xl bg-[#12101c]/90 border border-white/10 backdrop-blur-sm flex items-center justify-center shadow-xl">
+        <div class="absolute right-4 bottom-0 w-16 h-16 rounded-2xl border backdrop-blur-sm flex items-center justify-center shadow-xl" :class="isDark ? 'bg-[#12101c]/90 border-white/10' : 'bg-white border-gray-200'">
           <ChartPieIcon class="w-7 h-7 text-fuchsia-400" />
         </div>
       </div>

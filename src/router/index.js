@@ -26,11 +26,11 @@ const routes = [
     component: () => import('@/views/Auth/ChangePassword.vue'),
   },
 
-  // {
-  //   path: '/dashboard',
-  //   name: 'Dashboard',
-  //   component: () => import('@/views/Dashboard.vue'),
-  // },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: () => import('@/views/Dashboard.vue'),
+  },
 ]
 
 const router = createRouter({

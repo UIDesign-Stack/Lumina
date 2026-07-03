@@ -11,9 +11,16 @@ import {
 } from '@heroicons/vue/24/outline'
 import AuthLayout from '@/layouts/AuthLayout.vue'
 import AuthCard from '@/components/Auth/AuthCard.vue'
+import AuthTextField from '@/components/Auth/AuthTextField.vue'
+import AuthPrimaryButton from '@/components/Auth/AuthPrimaryButton.vue'
+import AuthSecondaryButton from '@/components/Auth/AuthSecondaryButton.vue'
+import AuthDivider from '@/components/Auth/AuthDivider.vue'
+import AuthErrorBanner from '@/components/Auth/AuthErrorBanner.vue'
 import { useAuth } from '@/composables/useAuth'
+import { useTheme } from '@/composables/useTheme'
 
 const { isLoading, errorMessage, sendResetPasswordEmail } = useAuth()
+const { isDark } = useTheme()
 
 const email = ref('')
 
@@ -32,7 +39,6 @@ function handleResendEmail() {
 
 <template>
   <AuthLayout :show-stats="false">
-   
     <template #brand-title>
       Keamanan Akun Anda<br />
       adalah <span class="bg-gradient-to-r from-indigo-400 to-fuchsia-400 bg-clip-text text-transparent">Prioritas Kami</span>
@@ -46,7 +52,6 @@ function handleResendEmail() {
 
     <template #brand-illustration>
       <div class="relative h-72 mt-4">
-
         <div class="absolute bottom-0 left-16 w-52 h-20 bg-purple-600/40 rounded-full blur-3xl"></div>
 
         <PaperAirplaneIcon class="absolute right-12 top-2 w-8 h-8 text-purple-300 rotate-45" />
@@ -102,68 +107,39 @@ function handleResendEmail() {
       </template>
 
       <form class="space-y-5" @submit.prevent="handleSubmit">
-        <p
-          v-if="errorMessage"
-          class="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-2"
-        >
-          {{ errorMessage }}
-        </p>
+        <AuthErrorBanner :message="errorMessage" />
 
-        <div>
-          <label for="email" class="block text-sm text-white mb-2">Email</label>
-          <div class="relative">
-            <EnvelopeIcon class="w-5 h-5 text-gray-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
-            <input
-              id="email"
-              v-model="email"
-              type="email"
-              autocomplete="email"
-              placeholder="Masukkan email Anda"
-              required
-              class="w-full bg-[#181428]/80 border border-white/10 rounded-xl py-3 pl-11 pr-4 text-white text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/60 focus:border-transparent transition"
-            />
-          </div>
-        </div>
+        <AuthTextField
+          id="email"
+          v-model="email"
+          label="Email"
+          type="email"
+          autocomplete="email"
+          placeholder="Masukkan email Anda"
+          :icon="EnvelopeIcon"
+        />
 
-        <button
-          type="submit"
-          :disabled="isLoading"
-          class="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-medium text-sm shadow-lg shadow-purple-900/40 transition"
-        >
-          {{ isLoading ? 'Mengirim...' : 'Kirim Instruksi Reset' }}
-        </button>
+        <AuthPrimaryButton :loading="isLoading" loading-text="Mengirim...">Kirim Instruksi Reset</AuthPrimaryButton>
       </form>
 
       <template #footer>
+        <AuthDivider />
 
-        <div class="flex items-center gap-4 my-6">
-          <div class="flex-1 h-px bg-white/10"></div>
-          <span class="text-xs text-gray-500">atau</span>
-          <div class="flex-1 h-px bg-white/10"></div>
-        </div>
-
-        <router-link
-          to="/login"
-          class="w-full py-3 rounded-xl border border-white/10 bg-[#181428]/60 hover:bg-[#181428] flex items-center justify-center gap-2 text-sm text-white font-medium transition"
-        >
+        <AuthSecondaryButton tag="router-link" to="/login">
           <ArrowLeftIcon class="w-4 h-4" />
           Kembali ke Halaman Login
-        </router-link>
+        </AuthSecondaryButton>
 
-        <div class="mt-6 rounded-xl border border-white/10 bg-[#181428]/40 p-4">
+        <div class="mt-6 rounded-xl border p-4" :class="isDark ? 'border-white/10 bg-[#181428]/40' : 'border-gray-200 bg-gray-50'">
           <div class="flex items-start gap-2.5">
             <InformationCircleIcon class="w-5 h-5 text-blue-400 flex-shrink-0" />
             <div>
-              <p class="text-white text-sm font-medium mb-1">Tidak menerima email?</p>
+              <p class="text-sm font-medium mb-1" :class="isDark ? 'text-white' : 'text-gray-900'">Tidak menerima email?</p>
               <p class="text-gray-400 text-sm leading-relaxed">
                 Periksa folder spam atau promo Anda.<br />
                 Jika masih belum menerima, coba kirim ulang.
               </p>
-              <button
-                type="button"
-                class="text-purple-400 hover:text-purple-300 text-sm mt-2 transition"
-                @click="handleResendEmail"
-              >
+              <button type="button" class="text-purple-400 hover:text-purple-300 text-sm mt-2 transition" @click="handleResendEmail">
                 Kirim Ulang Email
               </button>
             </div>

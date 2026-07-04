@@ -31,6 +31,11 @@ const routes = [
     name: 'Dashboard',
     component: () => import('@/views/Dashboard.vue'),
   },
+  {
+    path: '/transactions/income',
+    name: 'Pemasukan',
+    component: () => import('@/views/Transactions/Pemasukan.vue'),
+  },
 ]
 
 const router = createRouter({

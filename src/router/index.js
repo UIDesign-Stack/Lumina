@@ -41,6 +41,11 @@ const routes = [
     name: 'Pengeluaran',
     component: () => import('@/views/Transactions/Pengeluaran.vue'),
   },
+  {
+    path: '/transactions/transfer',
+    name: 'Transfer',
+    component: () => import('@/views/Transactions/Transfer.vue'),
+  },
 ]
 
 const router = createRouter({

@@ -97,25 +97,25 @@ const chartOptions = computed(() => ({
 <template>
   <div>
     <!-- Toolbar: periode, granularitas, filter -->
-    <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-1">
       <p class="text-base font-semibold" :class="isDark ? 'text-white' : 'text-gray-900'">Tren Pengeluaran</p>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 flex-wrap">
         <button
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium transition"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium whitespace-nowrap flex-shrink-0 transition"
           :class="isDark ? 'border-white/10 text-gray-300 hover:bg-white/5' : 'border-gray-300 text-gray-600 hover:bg-gray-50'"
         >
           6 Bulan Terakhir
           <ChevronDownIcon class="w-3.5 h-3.5" />
         </button>
         <button
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium transition"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium whitespace-nowrap flex-shrink-0 transition"
           :class="isDark ? 'border-white/10 text-gray-300 hover:bg-white/5' : 'border-gray-300 text-gray-600 hover:bg-gray-50'"
         >
           Bulanan
           <ChevronDownIcon class="w-3.5 h-3.5" />
         </button>
         <button
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium transition"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium whitespace-nowrap flex-shrink-0 transition"
           :class="isDark ? 'border-white/10 text-gray-300 hover:bg-white/5' : 'border-gray-300 text-gray-600 hover:bg-gray-50'"
         >
           <FunnelIcon class="w-3.5 h-3.5" />

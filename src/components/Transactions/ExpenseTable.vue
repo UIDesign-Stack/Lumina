@@ -237,10 +237,11 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
     </div>
 
     <!-- Pagination -->
-    <div class="flex flex-wrap items-center justify-between gap-3 p-5 border-t" :class="isDark ? 'border-white/5' : 'border-gray-100'">
-      <p class="text-xs" :class="isDark ? 'text-gray-500' : 'text-gray-400'">{{ rangeLabel }}</p>
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-5 border-t" :class="isDark ? 'border-white/5' : 'border-gray-100'">
+      <p class="text-xs text-center sm:text-left" :class="isDark ? 'text-gray-500' : 'text-gray-400'">{{ rangeLabel }}</p>
 
-      <div class="flex items-center gap-1.5">
+      <div class="w-full sm:w-auto overflow-x-auto order-first sm:order-none">
+        <div class="flex items-center gap-1.5 w-max mx-auto">
         <button
           class="w-8 h-8 rounded-lg border flex items-center justify-center transition disabled:opacity-40 disabled:cursor-not-allowed"
           :class="isDark ? 'border-white/10 text-gray-400 hover:text-white' : 'border-gray-300 text-gray-500 hover:text-gray-900'"
@@ -272,11 +273,12 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
         >
           <ChevronRightIcon class="w-4 h-4" />
         </button>
+        </div>
       </div>
 
       <select
         v-model.number="pageSize"
-        class="border rounded-lg py-1.5 px-2.5 text-xs focus:outline-none transition"
+        class="border rounded-lg py-1.5 px-2.5 text-xs focus:outline-none transition mx-auto sm:mx-0"
         :class="isDark ? 'bg-[#181428]/80 border-white/10 text-gray-300' : 'bg-gray-50 border-gray-300 text-gray-600'"
         @change="currentPage = 1"
       >

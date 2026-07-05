@@ -1,6 +1,3 @@
-// Mock data untuk halaman Pemasukan. Ganti isi tiap fungsi ini dengan
-// pemanggilan API sungguhan saat backend sudah tersedia.
-
 function generateIncomeRows(count) {
   const categories = [
     { label: 'Pendapatan Jasa', color: 'emerald' },

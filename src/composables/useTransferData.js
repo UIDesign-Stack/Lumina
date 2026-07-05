@@ -1,6 +1,3 @@
-// Mock data untuk halaman Transfer. Ganti isi tiap fungsi ini dengan
-// pemanggilan API sungguhan saat backend sudah tersedia.
-
 export function useTransferData() {
   // Kontak favorit untuk quick-select di bagian atas
   const quickFavorites = [

@@ -56,6 +56,12 @@ const routes = [
     name: 'Bugdet',
     component: () => import('@/views/Budget/Anggaran.vue'),
   },
+  {
+    path: '/management/category',
+    name: 'Category',
+    component: () => import('@/views/Category/Kategori.vue'),
+  },
+  
 ]
 
 const router = createRouter({

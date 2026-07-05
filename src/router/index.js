@@ -51,6 +51,11 @@ const routes = [
     name: 'Rekonsiliasi',
     component: () => import('@/views/Transactions/Rekonsiliasi.vue'),
   },
+  {
+    path: '/management/budget',
+    name: 'Bugdet',
+    component: () => import('@/views/Budget/Anggaran.vue'),
+  },
 ]
 
 const router = createRouter({

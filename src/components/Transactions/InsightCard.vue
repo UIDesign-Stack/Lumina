@@ -15,6 +15,7 @@ const { isDark } = useTheme()
 const colorMap = {
   emerald: { text: 'text-emerald-400', bg: 'bg-emerald-500/15' },
   rose: { text: 'text-rose-400', bg: 'bg-rose-500/15' },
+  purple: { text: 'text-purple-400', bg: 'bg-purple-500/15' },
 }
 </script>
 

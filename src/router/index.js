@@ -46,6 +46,11 @@ const routes = [
     name: 'Transfer',
     component: () => import('@/views/Transactions/Transfer.vue'),
   },
+  {
+    path: '/transactions/reconciliation',
+    name: 'Rekonsiliasi',
+    component: () => import('@/views/Transactions/Rekonsiliasi.vue'),
+  },
 ]
 
 const router = createRouter({

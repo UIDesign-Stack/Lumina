@@ -3,7 +3,7 @@ import { ExclamationTriangleIcon } from '@heroicons/vue/24/outline'
 import { useTheme } from '@/composables/useTheme'
 
 defineProps({
-  alerts: { type: Array, required: true }, // [{ key, name, percent, level }]
+  alerts: { type: Array, required: true },
 })
 
 const { isDark } = useTheme()

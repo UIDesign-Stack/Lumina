@@ -61,6 +61,11 @@ const routes = [
     name: 'Category',
     component: () => import('@/views/Category/Kategori.vue'),
   },
+  {
+    path: '/management/accounts',
+    name: 'Akun',
+    component: () => import('@/views/Account/Akun.vue'),
+  },
   
 ]
 

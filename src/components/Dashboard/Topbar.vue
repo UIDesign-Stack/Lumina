@@ -39,7 +39,7 @@ const userMenuOpen = ref(false)
     class="sticky top-0 z-30 backdrop-blur-sm px-4 sm:px-6 py-3.5 flex items-center gap-3 transition-colors"
     :class="isDark ? 'bg-[#07050f]/90 border-b border-white/5' : 'bg-white/90 border-b border-gray-200'"
   >
-    <!-- Hamburger (mobile) -->
+
     <button
       class="lg:hidden flex-shrink-0 transition"
       :class="isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'"
@@ -48,7 +48,6 @@ const userMenuOpen = ref(false)
       <Bars3Icon class="w-6 h-6" />
     </button>
 
-    <!-- Search -->
     <div class="relative flex-1 max-w-xl hidden sm:block">
       <MagnifyingGlassIcon
         class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2"
@@ -72,7 +71,7 @@ const userMenuOpen = ref(false)
     </div>
 
     <div class="flex items-center gap-4 sm:gap-5 ml-auto">
-      <!-- Search icon -->
+
       <button
         class="flex-shrink-0 transition"
         :class="isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'"
@@ -80,7 +79,6 @@ const userMenuOpen = ref(false)
         <MagnifyingGlassIcon class="w-5 h-5" />
       </button>
 
-      <!-- Notifikasi -->
       <button
         class="relative flex-shrink-0 transition"
         :class="isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'"
@@ -94,7 +92,6 @@ const userMenuOpen = ref(false)
         </span>
       </button>
 
-      <!-- User -->
       <button class="flex items-center gap-2.5 flex-shrink-0" @click="userMenuOpen = !userMenuOpen">
         <div class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white text-sm font-semibold flex-shrink-0 overflow-hidden">
           <img v-if="userAvatar" :src="userAvatar" :alt="userName" class="w-full h-full object-cover" />

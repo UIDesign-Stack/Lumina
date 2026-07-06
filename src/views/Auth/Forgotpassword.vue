@@ -28,7 +28,7 @@ async function handleSubmit() {
   try {
     await sendResetPasswordEmail({ email: email.value })
   } catch {
-    // errorMessage sudah diisi di dalam useAuth
+    
   }
 }
 

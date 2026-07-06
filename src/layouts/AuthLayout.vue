@@ -6,7 +6,7 @@ import { useTheme } from '@/composables/useTheme'
 defineProps({
   brandTitle: {
     type: String,
-    default: undefined, // fallback ke default di BrandPanel.vue
+    default: undefined,
   },
   brandDescription: {
     type: String,
@@ -18,7 +18,7 @@ defineProps({
   },
   maxWidth: {
     type: String,
-    default: 'max-w-6xl', // set 'max-w-7xl' untuk halaman dengan form lebih lebar, mis. Register
+    default: 'max-w-6xl',
   },
 })
 
@@ -41,7 +41,6 @@ const { isDark } = useTheme()
           <template v-if="slots['brand-footer']" #footer><slot name="brand-footer" /></template>
         </BrandPanel>
 
-        <!-- Konten form: diisi oleh Login.vue / Register.vue / ForgotPassword.vue / ChangePassword.vue -->
         <slot />
       </div>
     </div>

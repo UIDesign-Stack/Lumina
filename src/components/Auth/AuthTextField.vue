@@ -7,12 +7,12 @@ const props = defineProps({
   id: { type: String, required: true },
   label: { type: String, required: true },
   modelValue: { type: String, default: '' },
-  type: { type: String, default: 'text' }, // text | email | tel | password
+  type: { type: String, default: 'text' },
   icon: { type: [Object, Function], required: true },
   placeholder: { type: String, default: '' },
   autocomplete: { type: String, default: '' },
   required: { type: Boolean, default: true },
-  revealable: { type: Boolean, default: false }, // tampilkan toggle show/hide (untuk password)
+  revealable: { type: Boolean, default: false },
 })
 
 defineEmits(['update:modelValue'])

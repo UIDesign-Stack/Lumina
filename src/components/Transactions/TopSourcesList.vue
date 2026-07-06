@@ -3,7 +3,7 @@ import { BuildingLibraryIcon } from '@heroicons/vue/24/outline'
 import { useTheme } from '@/composables/useTheme'
 
 defineProps({
-  sources: { type: Array, required: true }, // [{ name, amount, percent }]
+  sources: { type: Array, required: true },
 })
 
 const { isDark } = useTheme()

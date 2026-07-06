@@ -43,7 +43,7 @@ async function handleSubmit() {
     await changePassword({ newPassword: newPassword.value, confirmNewPassword: confirmNewPassword.value })
     router.push('/login')
   } catch {
-    // errorMessage sudah diisi di dalam useAuth
+   
   }
 }
 </script>

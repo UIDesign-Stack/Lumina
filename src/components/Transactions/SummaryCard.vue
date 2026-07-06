@@ -13,8 +13,8 @@ const props = defineProps({
   value: { type: String, required: true },
   change: { type: String, default: null },
   changeLabel: { type: String, default: '' },
-  trend: { type: String, default: null }, // 'up' | 'down' | null
-  icon: { type: String, default: 'wallet' }, // wallet | calendar | check
+  trend: { type: String, default: null },
+  icon: { type: String, default: 'wallet' },
   hasInfo: { type: Boolean, default: false },
 })
 

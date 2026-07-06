@@ -2,9 +2,9 @@
 import { BuildingLibraryIcon } from '@heroicons/vue/24/solid'
 
 defineProps({
-  logo: { type: String, default: '' }, // BNI | BCA | Mandiri | OVO | BRI | GoPay
+  logo: { type: String, default: '' },
   color: { type: String, default: 'blue' },
-  size: { type: String, default: 'md' }, // sm | md
+  size: { type: String, default: 'md' },
 })
 
 const colorMap = {

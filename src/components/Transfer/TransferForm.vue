@@ -64,7 +64,6 @@ function handleSubmit() {
         </button>
       </div>
 
-      <!-- Tujuan Transfer -->
       <div>
         <label class="block text-sm mb-2" :class="isDark ? 'text-white' : 'text-gray-700'">Tujuan Transfer</label>
         <div class="flex items-center gap-2">
@@ -88,7 +87,6 @@ function handleSubmit() {
         </div>
       </div>
 
-      <!-- Metode transfer -->
       <div class="flex items-center gap-2 flex-wrap">
         <button
           v-for="method in methods"
@@ -104,7 +102,6 @@ function handleSubmit() {
         </button>
       </div>
 
-      <!-- Nomor Rekening -->
       <div>
         <label class="block text-sm mb-2" :class="isDark ? 'text-white' : 'text-gray-700'">Nomor Rekening</label>
         <input
@@ -116,13 +113,11 @@ function handleSubmit() {
         />
       </div>
 
-      <!-- Nama Penerima -->
       <div>
         <label class="block text-sm mb-2" :class="isDark ? 'text-white' : 'text-gray-700'">Nama Penerima</label>
         <p class="text-sm" :class="isDark ? 'text-gray-500' : 'text-gray-400'">{{ receiverName || '-' }}</p>
       </div>
 
-      <!-- Jumlah & Berita -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label class="block text-sm mb-2" :class="isDark ? 'text-white' : 'text-gray-700'">Jumlah Transfer</label>
@@ -156,7 +151,6 @@ function handleSubmit() {
         </div>
       </div>
 
-      <!-- Simpan sebagai favorit -->
       <div class="flex items-center justify-between">
         <span class="text-sm" :class="isDark ? 'text-gray-300' : 'text-gray-600'">Simpan sebagai Rekening Tersimpan</span>
         <button
@@ -172,7 +166,6 @@ function handleSubmit() {
         </button>
       </div>
 
-      <!-- Tombol Lanjutkan -->
       <button
         type="submit"
         class="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-medium text-sm shadow-lg shadow-purple-900/40 transition flex items-center justify-center gap-2"

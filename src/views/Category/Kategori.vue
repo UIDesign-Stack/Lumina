@@ -35,7 +35,7 @@ const tableTitle = computed(() =>
 
 <template>
   <DashboardLayout :unread-notifications="8">
-    <!-- Header halaman -->
+
     <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
       <div>
         <h1 class="text-2xl font-bold" :class="isDark ? 'text-white' : 'text-gray-900'">Kategori</h1>
@@ -49,10 +49,9 @@ const tableTitle = computed(() =>
       </button>
     </div>
 
-    <!-- Tabs -->
+
     <ReconciliationTabs :tabs="tabs" v-model:active-tab="activeTab" />
 
-    <!-- Kartu ringkasan -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 mb-6">
       <BudgetSummaryCard
         v-for="card in summaryCards"
@@ -65,7 +64,6 @@ const tableTitle = computed(() =>
       />
     </div>
 
-    <!-- Grid utama: tabel (kiri, 2/3) + sidebar kanan (1/3) -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <div class="lg:col-span-2">
         <CategoryTable :title="tableTitle" :categories="activeCategories" />

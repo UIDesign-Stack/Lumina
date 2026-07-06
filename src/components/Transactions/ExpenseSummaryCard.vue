@@ -13,10 +13,10 @@ const props = defineProps({
   value: { type: String, required: true },
   change: { type: String, default: null },
   changeLabel: { type: String, default: '' },
-  trend: { type: String, default: null }, // 'up' | 'down' | null
-  icon: { type: String, default: 'wallet' }, // wallet | calendar | document | trend
-  color: { type: String, default: 'rose' }, // rose | purple | blue | amber
-  highlight: { type: String, default: null }, // teks kategori di bawah value, mis. "Pembelian ATK"
+  trend: { type: String, default: null },
+  icon: { type: String, default: 'wallet' },
+  color: { type: String, default: 'rose' },
+  highlight: { type: String, default: null }, 
 })
 
 const { isDark } = useTheme()

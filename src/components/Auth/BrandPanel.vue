@@ -27,10 +27,9 @@ const { isDark } = useTheme()
 
 <template>
   <div class="relative hidden lg:block">
-    <!-- Ambient glow -->
+
     <div class="absolute -top-20 -left-20 w-96 h-96 bg-purple-700/20 rounded-full blur-3xl pointer-events-none"></div>
 
-    <!-- Logo -->
     <div class="relative flex items-center gap-3 mb-14">
       <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-400 via-purple-500 to-fuchsia-500 flex items-center justify-center shadow-lg shadow-purple-900/40">
         <span class="text-white font-bold text-lg">L</span>
@@ -41,7 +40,6 @@ const { isDark } = useTheme()
       </div>
     </div>
 
-    <!-- Headline: default rendering dari prop `title`, atau override lewat slot #title untuk markup kustom (mis. sebagian teks berwarna) -->
     <h1 class="relative text-4xl font-bold leading-tight mb-5 whitespace-pre-line" :class="isDark ? 'text-white' : 'text-gray-900'">
       <slot name="title">{{ title }}</slot>
     </h1>
@@ -49,18 +47,15 @@ const { isDark } = useTheme()
       {{ description }}
     </p>
 
-    <!-- Konten tambahan opsional (mis. daftar fitur), tampil di antara deskripsi & ilustrasi -->
     <div class="relative mb-8">
       <slot name="features" />
     </div>
 
-    <!-- Ilustrasi: default kartu statistik, atau override lewat slot #illustration -->
     <slot name="illustration">
       <div v-if="showStats" class="relative h-72">
         <!-- Glow dasar -->
         <div class="absolute bottom-0 left-24 w-40 h-16 bg-purple-600/40 rounded-full blur-2xl"></div>
 
-        <!-- Kartu Total Aset -->
         <div class="absolute left-0 top-0 w-52 rounded-2xl border backdrop-blur-sm p-4 shadow-xl" :class="isDark ? 'bg-[#12101c]/90 border-white/10' : 'bg-white border-gray-200'">
           <p class="text-xs mb-1" :class="isDark ? 'text-gray-400' : 'text-gray-500'">Total Aset</p>
           <p class="font-semibold text-lg" :class="isDark ? 'text-white' : 'text-gray-900'">Rp 56.750.000.000</p>
@@ -70,7 +65,6 @@ const { isDark } = useTheme()
           </p>
         </div>
 
-        <!-- Kartu Grafik -->
         <div class="absolute right-0 top-8 w-44 h-36 rounded-2xl border backdrop-blur-sm p-4 shadow-xl flex flex-col gap-3" :class="isDark ? 'bg-[#12101c]/90 border-white/10' : 'bg-white border-gray-200'">
           <div class="h-2 w-16 rounded" :class="isDark ? 'bg-white/10' : 'bg-gray-200'"></div>
           <div class="flex items-end gap-4 flex-1">
@@ -83,7 +77,6 @@ const { isDark } = useTheme()
           </div>
         </div>
 
-        <!-- Kartu tren garis -->
         <div class="absolute left-14 bottom-4 w-52 h-28 rounded-2xl border backdrop-blur-sm p-4 shadow-xl" :class="isDark ? 'bg-[#12101c]/90 border-white/10' : 'bg-white border-gray-200'">
           <div class="h-2 w-20 rounded mb-3" :class="isDark ? 'bg-white/10' : 'bg-gray-200'"></div>
           <svg viewBox="0 0 160 50" class="w-full h-12">
@@ -105,19 +98,16 @@ const { isDark } = useTheme()
           </svg>
         </div>
 
-        <!-- Kartu shield -->
         <div class="absolute left-0 bottom-0 w-16 h-16 rounded-2xl border backdrop-blur-sm flex items-center justify-center shadow-xl" :class="isDark ? 'bg-[#12101c]/90 border-white/10' : 'bg-white border-gray-200'">
           <ShieldCheckIcon class="w-7 h-7 text-purple-400" />
         </div>
 
-        <!-- Kartu pie -->
         <div class="absolute right-4 bottom-0 w-16 h-16 rounded-2xl border backdrop-blur-sm flex items-center justify-center shadow-xl" :class="isDark ? 'bg-[#12101c]/90 border-white/10' : 'bg-white border-gray-200'">
           <ChartPieIcon class="w-7 h-7 text-fuchsia-400" />
         </div>
       </div>
     </slot>
 
-    <!-- Footer opsional, mis. link "Sudah punya akun? Masuk di sini" -->
     <div class="relative mt-8">
       <slot name="footer" />
     </div>

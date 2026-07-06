@@ -18,18 +18,17 @@ const { isDark } = useTheme()
 
 const activeTab = ref(tabs[0])
 
-// Rekening asal default (nanti bisa dibuat dinamis lewat dropdown "Dari Rekening")
 const fromAccount = myAccounts[0]
 
 function handleSubmitTransfer(payload) {
-  // TODO: sambungkan ke API transfer
+
   console.log('Transfer submitted:', payload)
 }
 </script>
 
 <template>
   <DashboardLayout :unread-notifications="8">
-    <!-- Header halaman -->
+
     <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
       <div>
         <h1 class="text-2xl font-bold" :class="isDark ? 'text-white' : 'text-gray-900'">Transfer</h1>
@@ -45,17 +44,14 @@ function handleSubmitTransfer(payload) {
       </button>
     </div>
 
-    <!-- Tabs -->
     <div class="mb-6">
       <TransferTabs :tabs="tabs" v-model:active-tab="activeTab" />
     </div>
 
-    <!-- Favorit quick-select -->
     <div class="mb-6">
       <FavoriteQuickSelect :favorites="quickFavorites" />
     </div>
 
-    <!-- Grid utama: form (kiri) + rekening saya & promo (tengah) + favorit & riwayat (kanan) -->
     <div class="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-12 gap-4">
       <div class="xl:col-span-5">
         <TransferForm :from-account="fromAccount" :methods="transferMethods" @submit="handleSubmitTransfer" />

@@ -4,7 +4,8 @@ import { ArrowRightIcon } from '@heroicons/vue/24/outline'
 import { useTheme } from '@/composables/useTheme'
 
 defineProps({
-  tip: { type: Object, required: true }, // { text, linkText }
+  heading: { type: String, default: 'Tips Kategori' },
+  tip: { type: Object, required: true },
 })
 
 const { isDark } = useTheme()
@@ -12,7 +13,7 @@ const { isDark } = useTheme()
 
 <template>
   <div class="rounded-2xl border p-5" :class="isDark ? 'bg-[#100c1c]/80 border-white/10' : 'bg-white border-gray-200'">
-    <p class="text-base font-semibold mb-4" :class="isDark ? 'text-white' : 'text-gray-900'">Tips Kategori</p>
+    <p class="text-base font-semibold mb-4" :class="isDark ? 'text-white' : 'text-gray-900'">{{ heading }}</p>
     <div class="flex items-start gap-3">
       <div class="w-10 h-10 rounded-xl bg-purple-500/15 flex items-center justify-center flex-shrink-0">
         <LightBulbIcon class="w-5 h-5 text-purple-400" />

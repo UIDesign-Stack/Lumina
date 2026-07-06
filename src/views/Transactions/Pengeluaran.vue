@@ -26,7 +26,7 @@ const { isDark } = useTheme()
 
 <template>
   <DashboardLayout :unread-notifications="8">
-    <!-- Header halaman -->
+
     <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
       <div>
         <h1 class="text-2xl font-bold" :class="isDark ? 'text-white' : 'text-gray-900'">Pengeluaran</h1>
@@ -49,7 +49,6 @@ const { isDark } = useTheme()
       </div>
     </div>
 
-    <!-- Kartu ringkasan -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
       <ExpenseSummaryCard
         v-for="card in summaryCards"
@@ -65,9 +64,8 @@ const { isDark } = useTheme()
       />
     </div>
 
-    <!-- Grid utama: kiri (Tren + Kategori + Tabel) & kanan (Terbesar + Ringkasan + Insight) -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-      <!-- Kolom kiri: lebar 2/3 -->
+
       <div class="lg:col-span-2 space-y-4">
         <div class="grid grid-cols-1 sm:grid-cols-5 gap-4">
           <div class="sm:col-span-3 rounded-2xl border p-5" :class="isDark ? 'bg-[#100c1c]/80 border-white/10' : 'bg-white border-gray-200'">
@@ -82,7 +80,6 @@ const { isDark } = useTheme()
         <ExpenseTable :rows="tableRows" />
       </div>
 
-      <!-- Kolom kanan: lebar 1/3, menumpuk vertikal -->
       <div class="space-y-4">
         <TopExpensesList :expenses="biggestExpenses" />
         <ExpenseSummaryList :items="budgetSummary" />

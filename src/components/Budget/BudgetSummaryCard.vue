@@ -1,23 +1,24 @@
 <script setup>
-import { BanknotesIcon, ChartBarIcon, ChartPieIcon, ArrowTrendingUpIcon } from '@heroicons/vue/24/outline'
+import { BanknotesIcon, ChartBarIcon, ChartPieIcon, ArrowTrendingUpIcon, CheckCircleIcon, CurrencyDollarIcon, ClockIcon } from '@heroicons/vue/24/outline'
 import { useTheme } from '@/composables/useTheme'
 
 defineProps({
   label: { type: String, required: true },
   value: { type: String, required: true },
   note: { type: String, required: true },
-  icon: { type: String, default: 'wallet' }, // wallet | chart | pie | trend
-  color: { type: String, default: 'purple' }, // purple | blue
+  icon: { type: String, default: 'wallet' },
+  color: { type: String, default: 'purple' },
 })
 
 const { isDark } = useTheme()
 
-const iconMap = { wallet: BanknotesIcon, chart: ChartBarIcon, pie: ChartPieIcon, trend: ArrowTrendingUpIcon }
+const iconMap = { wallet: BanknotesIcon, chart: ChartBarIcon, pie: ChartPieIcon, trend: ArrowTrendingUpIcon, check: CheckCircleIcon, dollar: CurrencyDollarIcon, clock: ClockIcon }
 const colorMap = {
   purple: { text: 'text-purple-400', iconBg: 'bg-purple-500/15', iconText: 'text-purple-400' },
   blue: { text: 'text-blue-400', iconBg: 'bg-blue-500/15', iconText: 'text-blue-400' },
   pink: { text: 'text-pink-400', iconBg: 'bg-pink-500/15', iconText: 'text-pink-400' },
   emerald: { text: 'text-emerald-400', iconBg: 'bg-emerald-500/15', iconText: 'text-emerald-400' },
+  indigo: { text: 'text-indigo-400', iconBg: 'bg-indigo-500/15', iconText: 'text-indigo-400' },
 }
 </script>
 

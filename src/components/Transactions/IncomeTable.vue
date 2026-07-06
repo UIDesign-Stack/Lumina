@@ -95,7 +95,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
 
 <template>
   <div class="rounded-2xl border" :class="isDark ? 'bg-[#100c1c]/80 border-white/10' : 'bg-white border-gray-200'">
-    <!-- Header: judul + toolbar -->
+
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-5">
       <p class="text-base font-semibold" :class="isDark ? 'text-white' : 'text-gray-900'">Daftar Pemasukan</p>
 
@@ -126,7 +126,6 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
       </div>
     </div>
 
-    <!-- Tabel (desktop) -->
     <div class="overflow-x-auto hidden md:block">
       <table class="w-full text-sm">
         <thead>
@@ -210,7 +209,6 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside))
       </table>
     </div>
 
-    <!-- List (mobile) -->
     <div class="md:hidden divide-y" :class="isDark ? 'divide-white/5' : 'divide-gray-100'">
       <div v-for="row in paginatedRows" :key="row.id" class="p-4">
         <div class="flex items-start justify-between mb-1.5">

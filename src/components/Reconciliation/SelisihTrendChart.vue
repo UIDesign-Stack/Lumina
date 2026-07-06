@@ -19,7 +19,7 @@ ChartJS.register(LineController, LineElement, PointElement, LinearScale, Categor
 const props = defineProps({
   labels: { type: Array, required: true },
   data: { type: Array, required: true },
-  stats: { type: Object, required: true }, // { total, biggest: {value, date}, smallest: {value, date} }
+  stats: { type: Object, required: true },
 })
 
 const { isDark } = useTheme()
@@ -87,7 +87,7 @@ const chartOptions = computed(() => ({
 
 <template>
   <div class="rounded-2xl border p-5" :class="isDark ? 'bg-[#100c1c]/80 border-white/10' : 'bg-white border-gray-200'">
-    <!-- Header: judul + Harian, membentang full lebar card (sejajar tepi kanan statistik di bawah) -->
+
     <div class="flex items-center justify-between mb-4">
       <p class="text-base font-semibold" :class="isDark ? 'text-white' : 'text-gray-900'">Tren Selisih Rekonsiliasi</p>
       <button
@@ -100,14 +100,12 @@ const chartOptions = computed(() => ({
     </div>
 
     <div class="flex flex-col xl:flex-row gap-6">
-      <!-- Chart -->
       <div class="flex-1 min-w-0">
         <div class="h-64">
           <Line :data="chartData" :options="chartOptions" />
         </div>
       </div>
 
-      <!-- Statistik samping: lebar pas konten (auto), mentok kanan, tidak melar -->
       <div class="grid grid-cols-3 xl:grid-cols-1 gap-4 xl:gap-6 xl:flex-shrink-0 xl:ml-auto xl:pt-2 xl:text-right">
         <div>
           <p class="text-xs mb-1" :class="isDark ? 'text-gray-500' : 'text-gray-400'">Total Selisih</p>

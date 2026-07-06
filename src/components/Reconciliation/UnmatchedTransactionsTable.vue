@@ -80,7 +80,7 @@ function setFilter(f) {
 
 <template>
   <div class="rounded-2xl border" :class="isDark ? 'bg-[#100c1c]/80 border-white/10' : 'bg-white border-gray-200'">
-    <!-- Filter pills + search + toolbar -->
+    
     <div class="flex flex-col gap-3 p-5">
       <div class="flex items-center gap-2 flex-wrap">
         <button
@@ -119,7 +119,6 @@ function setFilter(f) {
 
     <p class="px-5 pb-3 text-base font-semibold" :class="isDark ? 'text-white' : 'text-gray-900'">Transaksi Belum Dicocokkan</p>
 
-    <!-- Tabel dual-column (desktop) -->
     <div class="overflow-x-auto hidden lg:block">
       <table class="w-full text-sm">
         <thead>
@@ -184,7 +183,6 @@ function setFilter(f) {
       </table>
     </div>
 
-    <!-- List (mobile) -->
     <div class="lg:hidden divide-y" :class="isDark ? 'divide-white/5' : 'divide-gray-100'">
       <div v-for="row in paginatedRows" :key="row.id" class="p-4">
         <div class="flex items-start justify-between mb-2">

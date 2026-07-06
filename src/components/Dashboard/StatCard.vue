@@ -14,13 +14,13 @@ Chart.register(...registerables)
 const { isDark } = useTheme()
 
 const props = defineProps({
-  cardKey: { type: String, default: '' }, // income | expense | profit | cash
+  cardKey: { type: String, default: '' },
   title: { type: String, required: true },
   value: { type: String, required: true },
   change: { type: String, required: true },
   changeLabel: { type: String, default: '' },
-  trend: { type: String, default: 'up' }, // 'up' | 'down'
-  color: { type: String, default: 'emerald' }, // emerald | rose | blue | amber
+  trend: { type: String, default: 'up' },
+  color: { type: String, default: 'emerald' },
   sparkline: { type: Array, default: () => [] },
 })
 

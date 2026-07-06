@@ -96,7 +96,7 @@ const chartOptions = computed(() => ({
 
 <template>
   <div>
-    <!-- Toolbar: periode, granularitas, filter -->
+
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-1">
       <p class="text-base font-semibold" :class="isDark ? 'text-white' : 'text-gray-900'">Tren Pengeluaran</p>
       <div class="flex items-center gap-2 flex-wrap">

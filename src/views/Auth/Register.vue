@@ -65,12 +65,12 @@ async function handleSubmit() {
     })
     router.push('/login')
   } catch {
-    // errorMessage sudah diisi di dalam useAuth
+   
   }
 }
 
 function handleGoogleRegister() {
-  // TODO: sambungkan ke OAuth Google
+  
   console.log('Daftar dengan Google')
 }
 </script>

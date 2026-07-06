@@ -8,7 +8,7 @@ const props = defineProps({
   modelValue: { type: String, default: '' },
   icon: { type: [Object, Function], required: true },
   placeholder: { type: String, default: 'Pilih salah satu' },
-  options: { type: Array, default: () => [] }, // [{ value, label }]
+  options: { type: Array, default: () => [] },
   required: { type: Boolean, default: true },
 })
 

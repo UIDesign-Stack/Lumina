@@ -9,7 +9,7 @@ import {
 import { useTheme } from '@/composables/useTheme'
 
 defineProps({
-  expenses: { type: Array, required: true }, // [{ description, category, amount, date, icon, color }]
+  expenses: { type: Array, required: true },
 })
 
 const { isDark } = useTheme()

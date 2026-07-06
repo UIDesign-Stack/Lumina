@@ -2,8 +2,8 @@
 import { useTheme } from '@/composables/useTheme'
 
 defineProps({
-  tag: { type: [String, Object], default: 'button' }, // 'button' | 'router-link' | 'a'
-  type: { type: String, default: 'button' }, // dipakai kalau tag='button'
+  tag: { type: [String, Object], default: 'button' },
+  type: { type: String, default: 'button' },
 })
 
 const { isDark } = useTheme()

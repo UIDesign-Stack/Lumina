@@ -19,7 +19,7 @@ const { isDark } = useTheme()
     </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-      <!-- Tambah Favorit -->
+
       <button
         class="rounded-xl border-2 border-dashed flex flex-col items-center justify-center gap-2 py-4 transition"
         :class="isDark ? 'border-white/10 text-gray-500 hover:border-white/20 hover:text-gray-300' : 'border-gray-300 text-gray-400 hover:border-gray-400 hover:text-gray-600'"
@@ -29,7 +29,6 @@ const { isDark } = useTheme()
         <span class="text-xs font-medium">Tambah Favorit</span>
       </button>
 
-      <!-- Kartu favorit -->
       <button
         v-for="fav in favorites"
         :key="fav.id"

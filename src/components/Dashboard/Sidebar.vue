@@ -107,7 +107,7 @@ const navGroups = [
       isDark ? 'bg-[#0b0817]' : 'bg-white border-r border-gray-200',
     ]"
   >
-    <!-- Logo -->
+
     <div class="flex items-center justify-between px-5 py-5">
       <div class="flex items-center gap-2.5">
         <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-indigo-400 via-purple-500 to-fuchsia-500 flex items-center justify-center flex-shrink-0">
@@ -127,7 +127,6 @@ const navGroups = [
       </button>
     </div>
 
-    <!-- Navigasi -->
     <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-6">
       <div v-for="(group, gIdx) in navGroups" :key="gIdx">
         <p v-if="group.label" class="px-3 mb-2 text-[10px] font-semibold tracking-[0.15em] text-gray-500 uppercase">
@@ -155,7 +154,6 @@ const navGroups = [
       </div>
     </nav>
 
-    <!-- Theme toggle -->
     <div class="relative px-3 py-4">
       <!-- Popup pilihan tema -->
       <div

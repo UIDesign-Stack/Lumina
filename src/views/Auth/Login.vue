@@ -25,12 +25,12 @@ async function handleSubmit() {
     await login({ email: email.value, password: password.value, rememberMe: rememberMe.value })
     router.push('/dashboard')
   } catch {
-    // errorMessage sudah diisi di dalam useAuth
+  
   }
 }
 
 function handleGoogleLogin() {
-  // TODO: sambungkan ke OAuth Google
+  
   console.log('Login dengan Google')
 }
 </script>

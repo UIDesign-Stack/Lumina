@@ -32,7 +32,7 @@ const activeTab = ref(tabs[0])
 
 <template>
   <DashboardLayout :unread-notifications="8">
-    <!-- Header halaman -->
+
     <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
       <div>
         <h1 class="text-2xl font-bold" :class="isDark ? 'text-white' : 'text-gray-900'">Anggaran</h1>
@@ -55,7 +55,6 @@ const activeTab = ref(tabs[0])
       </div>
     </div>
 
-    <!-- Kartu ringkasan -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
       <BudgetSummaryCard
         v-for="card in summaryCards"
@@ -68,13 +67,11 @@ const activeTab = ref(tabs[0])
       />
     </div>
 
-    <!-- Tabs + filter -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
       <ReconciliationTabs :tabs="tabs" v-model:active-tab="activeTab" />
       <BudgetFilterBar year="2024" />
     </div>
 
-    <!-- Grid utama: konten kiri (2/3) + sidebar kanan (1/3) -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <div class="lg:col-span-2 space-y-4">
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
@@ -99,7 +96,6 @@ const activeTab = ref(tabs[0])
         <BudgetTable :rows="budgetRows" />
       </div>
 
-      <!-- Sidebar kanan -->
       <div class="space-y-4">
         <DepartmentBudgetList :departments="departmentBreakdown" />
         <BudgetAlertList :alerts="budgetAlerts" />

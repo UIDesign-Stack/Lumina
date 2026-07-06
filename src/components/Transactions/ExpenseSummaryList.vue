@@ -8,7 +8,7 @@ import {
 import { useTheme } from '@/composables/useTheme'
 
 defineProps({
-  items: { type: Array, required: true }, // [{ label, value, icon, color, progress? }]
+  items: { type: Array, required: true },
 })
 
 const { isDark } = useTheme()
@@ -44,8 +44,7 @@ const colorMap = {
             <span v-if="item.progress !== undefined" class="text-rose-400 text-xs font-semibold">{{ item.progress }}%</span>
           </p>
         </div>
-
-        <!-- Progress bar untuk item Sisa Anggaran -->
+        
         <div v-if="item.progress !== undefined" class="h-1.5 rounded-full mt-2 ml-12 overflow-hidden" :class="isDark ? 'bg-white/10' : 'bg-gray-200'">
           <div class="h-full rounded-full bg-gradient-to-r from-rose-500 to-orange-400" :style="{ width: item.progress + '%' }"></div>
         </div>

@@ -95,7 +95,6 @@ function goToPage(p) {
       </div>
     </div>
 
-    <!-- Tabel (desktop) -->
     <div class="overflow-x-auto hidden md:block">
       <table class="w-full text-sm">
         <thead>
@@ -143,7 +142,6 @@ function goToPage(p) {
       </table>
     </div>
 
-    <!-- List (mobile) -->
     <div class="md:hidden divide-y" :class="isDark ? 'divide-white/5' : 'divide-gray-100'">
       <div v-for="row in paginatedRows" :key="row.id" class="p-4">
         <div class="flex items-start justify-between mb-1.5">
@@ -164,7 +162,6 @@ function goToPage(p) {
       </div>
     </div>
 
-    <!-- Pagination -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-5 border-t" :class="isDark ? 'border-white/5' : 'border-gray-100'">
       <p class="text-xs text-center sm:text-left" :class="isDark ? 'text-gray-500' : 'text-gray-400'">{{ rangeLabel }}</p>
 

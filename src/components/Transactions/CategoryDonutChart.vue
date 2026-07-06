@@ -7,7 +7,7 @@ import { useTheme } from '@/composables/useTheme'
 ChartJS.register(DoughnutController, ArcElement, Tooltip)
 
 const props = defineProps({
-  categories: { type: Array, required: true }, // [{ label, value, percent, color }]
+  categories: { type: Array, required: true },
   total: { type: String, required: true },
 })
 

@@ -66,6 +66,16 @@ const routes = [
     name: 'Akun',
     component: () => import('@/views/Account/Akun.vue'),
   },
+  {
+    path: '/management/projects',
+    name: 'Proyek',
+    component: () => import('@/views/Project/Proyek.vue'),
+  },
+  {
+    path: '/management/parties',
+    name: 'PihakKetiga',
+    component: () => import('@/views/ThirdParty/PihakKetiga.vue'),
+  },
   
 ]
 

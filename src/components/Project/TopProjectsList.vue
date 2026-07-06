@@ -2,7 +2,7 @@
 import { useTheme } from '@/composables/useTheme'
 
 defineProps({
-  projects: { type: Array, required: true }, // [{ rank, name, amount, percent, color }]
+  projects: { type: Array, required: true },
   title: { type: String, default: 'Proyek' },
   subtitle: { type: String, default: '' },
 })

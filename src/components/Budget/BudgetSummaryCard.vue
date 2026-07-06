@@ -6,8 +6,8 @@ defineProps({
   label: { type: String, required: true },
   value: { type: String, required: true },
   note: { type: String, required: true },
-  icon: { type: String, default: 'wallet' }, // wallet | chart | pie | trend | check | dollar | clock
-  color: { type: String, default: 'purple' }, // purple | blue | pink | emerald | indigo
+  icon: { type: String, default: 'wallet' },
+  color: { type: String, default: 'purple' },
 })
 
 const { isDark } = useTheme()

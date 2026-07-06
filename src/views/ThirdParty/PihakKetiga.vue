@@ -67,7 +67,7 @@ function handleSearchChange(q) {
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <div class="lg:col-span-2 space-y-4">
-        <!-- Tabs + search + filter -->
+
         <ProjectTabsBar
           :tabs="tabs"
           :active-tab="activeTab"
@@ -84,7 +84,6 @@ function handleSearchChange(q) {
         />
       </div>
 
-      <!-- Sidebar kanan -->
       <div class="space-y-4">
         <div class="rounded-2xl border p-5" :class="isDark ? 'bg-[#100c1c]/80 border-white/10' : 'bg-white border-gray-200'">
           <p class="text-base font-semibold mb-4" :class="isDark ? 'text-white' : 'text-gray-900'">Ringkasan Tipe Pihak Ketiga</p>

@@ -43,7 +43,7 @@ function handleSubmit() {
     <p class="text-base font-semibold mb-5" :class="isDark ? 'text-white' : 'text-gray-900'">Detail Transfer</p>
 
     <form class="space-y-5" @submit.prevent="handleSubmit">
-      <!-- Dari Rekening -->
+
       <div>
         <label class="block text-sm mb-2" :class="isDark ? 'text-white' : 'text-gray-700'">Dari Rekening</label>
         <button

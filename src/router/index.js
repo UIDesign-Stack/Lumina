@@ -76,6 +76,11 @@ const routes = [
     name: 'PihakKetiga',
     component: () => import('@/views/ThirdParty/PihakKetiga.vue'),
   },
+  {
+    path: '/reports/financial',
+    name: 'LaporanKeuangan',
+    component: () => import('@/views/Report/LaporanKeuangan.vue'),
+  },
   
 ]
 

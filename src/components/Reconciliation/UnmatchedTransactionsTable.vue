@@ -209,7 +209,6 @@ function setFilter(f) {
       </div>
     </div>
 
-    <!-- Pagination -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-5 border-t" :class="isDark ? 'border-white/5' : 'border-gray-100'">
       <p class="text-xs text-center sm:text-left" :class="isDark ? 'text-gray-500' : 'text-gray-400'">{{ rangeLabel }}</p>
 

@@ -71,7 +71,15 @@ const compareValue = ref(compareOptions[0])
       <div class="lg:col-span-2 space-y-4">
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
           <div class="lg:col-span-3 rounded-2xl border p-5" :class="isDark ? 'bg-[#100c1c]/80 border-white/10' : 'bg-white border-gray-200'">
-            <FinancialTrendChart :labels="trend.labels" :revenue="trend.revenue" :expense="trend.expense" :profit="trend.profit" />
+            <FinancialTrendChart
+              title="Tren Keuangan"
+              :labels="trend.labels"
+              :series="[
+                { label: 'Pendapatan', data: trend.revenue, color: '#a855f7' },
+                { label: 'Beban', data: trend.expense, color: '#f43f5e' },
+                { label: 'Laba Bersih', data: trend.profit, color: '#3b82f6' },
+              ]"
+            />
           </div>
           <div class="lg:col-span-2 rounded-2xl border p-5" :class="isDark ? 'bg-[#100c1c]/80 border-white/10' : 'bg-white border-gray-200'">
             <p class="text-base font-semibold mb-4" :class="isDark ? 'text-white' : 'text-gray-900'">Distribusi Pendapatan</p>
@@ -82,7 +90,6 @@ const compareValue = ref(compareOptions[0])
         <FinancialReportTable :rows="reportRows" />
       </div>
 
-      <!-- Sidebar kanan -->
       <div class="space-y-4">
         <RecentReportsList :reports="recentReports" />
         <FinancialInsightCard :insights="insights" period="Mei 2024" />

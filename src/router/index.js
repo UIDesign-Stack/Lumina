@@ -81,6 +81,11 @@ const routes = [
     name: 'LaporanKeuangan',
     component: () => import('@/views/Report/LaporanKeuangan.vue'),
   },
+  {
+    path: '/reports/cash-flow',
+    name: 'ArusKas',
+    component: () => import('@/views/CashFlow/ArusKas.vue'),
+  },
   
 ]
 

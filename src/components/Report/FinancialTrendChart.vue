@@ -17,10 +17,10 @@ import { useTheme } from '@/composables/useTheme'
 ChartJS.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Filler, Tooltip)
 
 const props = defineProps({
+  title: { type: String, default: 'Tren Keuangan' },
   labels: { type: Array, required: true },
-  revenue: { type: Array, required: true },
-  expense: { type: Array, required: true },
-  profit: { type: Array, required: true },
+  series: { type: Array, required: true }, // [{ label, data, color }]
+  periodLabel: { type: String, default: 'Harian' },
 })
 
 const { isDark } = useTheme()
@@ -33,41 +33,17 @@ function formatShort(value) {
 
 const chartData = computed(() => ({
   labels: props.labels,
-  datasets: [
-    {
-      label: 'Pendapatan',
-      data: props.revenue,
-      borderColor: '#a855f7',
-      backgroundColor: 'transparent',
-      pointBackgroundColor: '#a855f7',
-      pointRadius: 3,
-      pointHoverRadius: 5,
-      borderWidth: 2.5,
-      tension: 0.4,
-    },
-    {
-      label: 'Beban',
-      data: props.expense,
-      borderColor: '#f43f5e',
-      backgroundColor: 'transparent',
-      pointBackgroundColor: '#f43f5e',
-      pointRadius: 3,
-      pointHoverRadius: 5,
-      borderWidth: 2.5,
-      tension: 0.4,
-    },
-    {
-      label: 'Laba Bersih',
-      data: props.profit,
-      borderColor: '#3b82f6',
-      backgroundColor: 'transparent',
-      pointBackgroundColor: '#3b82f6',
-      pointRadius: 3,
-      pointHoverRadius: 5,
-      borderWidth: 2.5,
-      tension: 0.4,
-    },
-  ],
+  datasets: props.series.map((s) => ({
+    label: s.label,
+    data: s.data,
+    borderColor: s.color,
+    backgroundColor: 'transparent',
+    pointBackgroundColor: s.color,
+    pointRadius: 3,
+    pointHoverRadius: 5,
+    borderWidth: 2.5,
+    tension: 0.4,
+  })),
 }))
 
 const chartOptions = computed(() => ({
@@ -109,25 +85,19 @@ const chartOptions = computed(() => ({
 <template>
   <div>
     <div class="flex items-center justify-between mb-1">
-      <p class="text-base font-semibold" :class="isDark ? 'text-white' : 'text-gray-900'">Tren Keuangan</p>
+      <p class="text-base font-semibold" :class="isDark ? 'text-white' : 'text-gray-900'">{{ title }}</p>
       <button
         class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium whitespace-nowrap flex-shrink-0 transition"
         :class="isDark ? 'border-white/10 text-gray-300 hover:bg-white/5' : 'border-gray-300 text-gray-600 hover:bg-gray-50'"
       >
-        Harian
+        {{ periodLabel }}
         <ChevronDownIcon class="w-3.5 h-3.5" />
       </button>
     </div>
 
-    <div class="flex items-center gap-4 mb-4 text-xs">
-      <span class="flex items-center gap-1.5" :class="isDark ? 'text-gray-400' : 'text-gray-500'">
-        <span class="w-2 h-2 rounded-full bg-purple-500"></span> Pendapatan
-      </span>
-      <span class="flex items-center gap-1.5" :class="isDark ? 'text-gray-400' : 'text-gray-500'">
-        <span class="w-2 h-2 rounded-full bg-rose-500"></span> Beban
-      </span>
-      <span class="flex items-center gap-1.5" :class="isDark ? 'text-gray-400' : 'text-gray-500'">
-        <span class="w-2 h-2 rounded-full bg-blue-500"></span> Laba Bersih
+    <div class="flex items-center gap-4 mb-4 text-xs flex-wrap">
+      <span v-for="s in series" :key="s.label" class="flex items-center gap-1.5" :class="isDark ? 'text-gray-400' : 'text-gray-500'">
+        <span class="w-2 h-2 rounded-full" :style="{ backgroundColor: s.color }"></span> {{ s.label }}
       </span>
     </div>
 

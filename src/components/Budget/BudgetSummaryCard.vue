@@ -1,5 +1,5 @@
 <script setup>
-import { BanknotesIcon, ChartBarIcon, ChartPieIcon, ArrowTrendingUpIcon, CheckCircleIcon, CurrencyDollarIcon, ClockIcon, FolderIcon, UsersIcon } from '@heroicons/vue/24/outline'
+import { BanknotesIcon, ChartBarIcon, ChartPieIcon, ArrowTrendingUpIcon, CheckCircleIcon, CurrencyDollarIcon, ClockIcon, FolderIcon, UsersIcon, ArrowDownIcon, ArrowUpIcon } from '@heroicons/vue/24/outline'
 import { useTheme } from '@/composables/useTheme'
 
 defineProps({
@@ -12,7 +12,7 @@ defineProps({
 
 const { isDark } = useTheme()
 
-const iconMap = { wallet: BanknotesIcon, chart: ChartBarIcon, pie: ChartPieIcon, trend: ArrowTrendingUpIcon, check: CheckCircleIcon, dollar: CurrencyDollarIcon, clock: ClockIcon, folder: FolderIcon, users: UsersIcon }
+const iconMap = { wallet: BanknotesIcon, chart: ChartBarIcon, pie: ChartPieIcon, trend: ArrowTrendingUpIcon, check: CheckCircleIcon, dollar: CurrencyDollarIcon, clock: ClockIcon, folder: FolderIcon, users: UsersIcon, arrowDown: ArrowDownIcon, arrowUp: ArrowUpIcon }
 const colorMap = {
   purple: { text: 'text-purple-400', iconBg: 'bg-purple-500/15', iconText: 'text-purple-400' },
   blue: { text: 'text-blue-400', iconBg: 'bg-blue-500/15', iconText: 'text-blue-400' },

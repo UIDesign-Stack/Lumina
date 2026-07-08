@@ -6,11 +6,15 @@ import {
   ServerIcon,
   BuildingLibraryIcon,
   EllipsisHorizontalCircleIcon,
+  ShoppingCartIcon,
+  ChatBubbleLeftIcon,
 } from '@heroicons/vue/24/outline'
 import { useTheme } from '@/composables/useTheme'
 
 defineProps({
   departments: { type: Array, required: true },
+  title: { type: String, default: 'Anggaran per Departemen' },
+  linkText: { type: String, default: 'Lihat Semua' },
 })
 
 const { isDark } = useTheme()
@@ -22,6 +26,8 @@ const iconMap = {
   server: ServerIcon,
   bank: BuildingLibraryIcon,
   dots: EllipsisHorizontalCircleIcon,
+  cart: ShoppingCartIcon,
+  chat: ChatBubbleLeftIcon,
 }
 const colorMap = {
   purple: 'bg-purple-500/15 text-purple-400',
@@ -36,14 +42,14 @@ const colorMap = {
 <template>
   <div class="rounded-2xl border p-5" :class="isDark ? 'bg-[#100c1c]/80 border-white/10' : 'bg-white border-gray-200'">
     <div class="flex items-center justify-between mb-4">
-      <p class="text-base font-semibold" :class="isDark ? 'text-white' : 'text-gray-900'">Anggaran per Departemen</p>
-      <a href="#" class="text-sm text-purple-400 hover:text-purple-300 transition">Lihat Semua</a>
+      <p class="text-base font-semibold" :class="isDark ? 'text-white' : 'text-gray-900'">{{ title }}</p>
+      <a href="#" class="text-sm text-purple-400 hover:text-purple-300 transition">{{ linkText }}</a>
     </div>
 
     <ul class="space-y-4">
       <li v-for="dept in departments" :key="dept.key" class="flex items-center gap-3">
         <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" :class="colorMap[dept.color]">
-          <component :is="iconMap[dept.icon]" class="w-4.5 h-4.5" />
+          <component :is="iconMap[dept.icon]" class="w-4 h-4" />
         </div>
         <div class="flex-1 min-w-0">
           <div class="flex items-center justify-between mb-1.5">

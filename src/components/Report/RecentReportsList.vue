@@ -3,7 +3,8 @@ import { DocumentTextIcon, ArrowDownTrayIcon } from '@heroicons/vue/24/outline'
 import { useTheme } from '@/composables/useTheme'
 
 defineProps({
-  reports: { type: Array, required: true },
+  reports: { type: Array, required: true }, 
+  title: { type: String, default: 'Laporan Terbaru' },
 })
 
 const { isDark } = useTheme()
@@ -20,7 +21,7 @@ const colorMap = {
 <template>
   <div class="rounded-2xl border p-5" :class="isDark ? 'bg-[#100c1c]/80 border-white/10' : 'bg-white border-gray-200'">
     <div class="flex items-center justify-between mb-4">
-      <p class="text-base font-semibold" :class="isDark ? 'text-white' : 'text-gray-900'">Laporan Terbaru</p>
+      <p class="text-base font-semibold" :class="isDark ? 'text-white' : 'text-gray-900'">{{ title }}</p>
       <a href="#" class="text-sm text-purple-400 hover:text-purple-300 transition">Lihat Semua</a>
     </div>
 

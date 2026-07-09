@@ -91,6 +91,11 @@ const routes = [
     name: 'LabaRugi',
     component: () => import('@/views/ProfitLoss/LabaRugi.vue'),
   },
+  {
+    path: '/reports/balance-sheet',
+    name: 'Neraca',
+    component: () => import('@/views/BalanceSheet/Neraca.vue'),
+  },
   
 ]
 

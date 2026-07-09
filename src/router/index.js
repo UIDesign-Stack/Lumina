@@ -96,6 +96,11 @@ const routes = [
     name: 'Neraca',
     component: () => import('@/views/BalanceSheet/Neraca.vue'),
   },
+  {
+    path: '/reports/ledger',
+    name: 'BukuBesar',
+    component: () => import('@/views/Ledger/BukuBesar.vue'),
+  },
   
 ]
 

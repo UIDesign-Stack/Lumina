@@ -101,6 +101,11 @@ const routes = [
     name: 'BukuBesar',
     component: () => import('@/views/Ledger/BukuBesar.vue'),
   },
+  {
+    path: '/settings',
+    name: 'Pengaturan',
+    component: () => import('@/views/Pengaturan/Pengaturan.vue'),
+  },
   
 ]
 

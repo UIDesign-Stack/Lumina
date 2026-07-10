@@ -1,0 +1,102 @@
+import { ref } from 'vue'
+
+export function usePengaturanData() {
+  const tabs = ['Umum', 'Perusahaan', 'Akun & Rekening', 'Pajak', 'Notifikasi', 'Keamanan', 'Ekspor Data']
+
+  const generalPreferences = ref([
+    {
+      key: 'currency',
+      icon: 'currency',
+      label: 'Mata Uang Default',
+      description: 'Pilih mata uang yang digunakan sebagai default di sistem.',
+      value: 'IDR - Rupiah Indonesia',
+      options: ['IDR - Rupiah Indonesia', 'USD - Dolar Amerika', 'SGD - Dolar Singapura', 'EUR - Euro'],
+    },
+    {
+      key: 'numberFormat',
+      icon: 'hash',
+      label: 'Format Angka',
+      description: 'Atur format tampilan angka dan pemisah ribuan.',
+      value: '1.234.567,89 (Indonesia)',
+      options: ['1.234.567,89 (Indonesia)', '1,234,567.89 (Internasional)'],
+    },
+    {
+      key: 'timezone',
+      icon: 'clock',
+      label: 'Zona Waktu',
+      description: 'Pilih zona waktu untuk menyesuaikan waktu sistem.',
+      value: '(GMT+07:00) Jakarta',
+      options: ['(GMT+07:00) Jakarta', '(GMT+08:00) Makassar', '(GMT+09:00) Jayapura'],
+    },
+    {
+      key: 'fiscalYearStart',
+      icon: 'calendar',
+      label: 'Awal Periode Akuntansi',
+      description: 'Tentukan bulan dimulainya tahun buku perusahaan.',
+      value: 'Januari',
+      options: ['Januari', 'April', 'Juli', 'Oktober'],
+    },
+    {
+      key: 'pageSize',
+      icon: 'list',
+      label: 'Tampilan Data per Halaman',
+      description: 'Atur jumlah baris data yang ditampilkan pada tabel.',
+      value: '25',
+      options: ['10', '25', '50', '100'],
+    },
+    {
+      key: 'language',
+      icon: 'globe',
+      label: 'Bahasa',
+      description: 'Pilih bahasa yang digunakan di aplikasi.',
+      value: 'Bahasa Indonesia',
+      options: ['Bahasa Indonesia', 'English'],
+    },
+  ])
+
+  // Pengaturan tampilan (toggle)
+  const displaySettings = ref([
+    { key: 'darkMode', icon: 'moon', label: 'Mode Gelap', description: 'Aktifkan tema gelap di seluruh aplikasi.', enabled: true },
+    { key: 'compactSidebar', icon: 'book', label: 'Sidebar Ringkas', description: 'Gunakan tampilan sidebar dalam mode ringkas.', enabled: false },
+    { key: 'showTooltip', icon: 'info', label: 'Tampilkan Tooltip', description: 'Tampilkan bantuan singkat saat hover pada elemen.', enabled: true },
+    { key: 'pageAnimation', icon: 'sparkles', label: 'Animasi Halaman', description: 'Aktifkan animasi transisi antar halaman.', enabled: true },
+  ])
+
+  // Pengaturan notifikasi (toggle)
+  const notificationSettings = ref([
+    { key: 'emailNotif', icon: 'mail', label: 'Notifikasi Email', description: 'Terima notifikasi melalui email untuk aktivitas penting.', enabled: true },
+    { key: 'budgetReminder', icon: 'wallet', label: 'Pengingat Anggaran', description: 'Terima pengingat jika anggaran mendekati batas.', enabled: true },
+    { key: 'transactionNotif', icon: 'bell', label: 'Notifikasi Transaksi', description: 'Terima notifikasi untuk setiap transaksi baru.', enabled: false },
+    { key: 'dailySummary', icon: 'calendar', label: 'Ringkasan Harian', description: 'Terima ringkasan aktivitas harian melalui email.', enabled: true },
+  ])
+
+  const accountInfo = {
+    name: 'Fajar Ardiansyah',
+    role: 'Finance Manager',
+    email: 'fajar.ardiansyah@lumina.id',
+    avatar: '',
+  }
+
+  const aboutApp = {
+    name: 'Lumina Finance',
+    version: 'Versi 1.0.0',
+    description: 'Aplikasi manajemen keuangan perusahaan yang membantu Anda mengelola keuangan dengan lebih efisien dan akurat.',
+  }
+
+  const quickActions = [
+    { key: 'backup', label: 'Cadangkan Data Sekarang', icon: 'download', danger: false },
+    { key: 'restore', label: 'Pulihkan Data', icon: 'upload', danger: false },
+    { key: 'clearCache', label: 'Bersihkan Cache', icon: 'trash', danger: false },
+    { key: 'reset', label: 'Reset Pengaturan', icon: 'settings', danger: true },
+  ]
+
+  return {
+    tabs,
+    generalPreferences,
+    displaySettings,
+    notificationSettings,
+    accountInfo,
+    aboutApp,
+    quickActions,
+  }
+}

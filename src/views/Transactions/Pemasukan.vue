@@ -1,5 +1,6 @@
 <script setup>
-import { PlusIcon, ArrowUpTrayIcon, ChevronDownIcon } from '@heroicons/vue/24/outline'
+import { ref } from 'vue'
+import { PlusIcon, ArrowUpTrayIcon } from '@heroicons/vue/24/outline'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import SummaryCard from '@/components/Transactions/SummaryCard.vue'
 import IncomeTrendChart from '@/components/Transactions/IncomeTrendChart.vue'
@@ -7,11 +8,19 @@ import CategoryDonutChart from '@/components/Transactions/CategoryDonutChart.vue
 import TopSourcesList from '@/components/Transactions/TopSourcesList.vue'
 import InsightCard from '@/components/Transactions/InsightCard.vue'
 import IncomeTable from '@/components/Transactions/IncomeTable.vue'
+import IncomeFormModal from '@/components/Transactions/IncomeFormModal.vue'
 import { usePemasukanData } from '@/composables/usePemasukanData'
 import { useTheme } from '@/composables/useTheme'
 
 const { summaryCards, trend, categoryBreakdown, categoryTotal, topSources, insight, tableRows } = usePemasukanData()
 const { isDark } = useTheme()
+
+const showNewIncomeModal = ref(false)
+
+function handleIncomeSubmit(payload) {
+  // TODO: kirim payload ke API / composable untuk disimpan
+  console.log('Pemasukan baru:', payload)
+}
 </script>
 
 <template>
@@ -31,10 +40,12 @@ const { isDark } = useTheme()
           <ArrowUpTrayIcon class="w-4 h-4" />
           Impor Data
         </button>
-        <button class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition">
+        <button
+          class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition"
+          @click="showNewIncomeModal = true"
+        >
           <PlusIcon class="w-4 h-4" />
           Pemasukan Baru
-          <ChevronDownIcon class="w-4 h-4 opacity-80" />
         </button>
       </div>
     </div>
@@ -81,5 +92,11 @@ const { isDark } = useTheme()
     </div>
 
     <IncomeTable :rows="tableRows" />
+
+    <IncomeFormModal
+      :open="showNewIncomeModal"
+      @close="showNewIncomeModal = false"
+      @submit="handleIncomeSubmit"
+    />
   </DashboardLayout>
 </template>

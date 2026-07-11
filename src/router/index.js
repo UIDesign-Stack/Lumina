@@ -116,6 +116,11 @@ const routes = [
     name: 'Pengguna & Peran',
     component: () => import('@/views/Pengguna/Pengguna.vue'),
   },
+  {
+    path: '/settings/audit-log',
+    name: 'Audit Log',
+    component: () => import('@/views/Audit/AuditLog.vue'),
+  },
 ]
 
 const router = createRouter({

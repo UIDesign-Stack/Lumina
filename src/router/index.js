@@ -106,7 +106,11 @@ const routes = [
     name: 'Pengaturan',
     component: () => import('@/views/Pengaturan/Pengaturan.vue'),
   },
-  
+  {
+    path: '/settings/integrations',
+    name: 'Integration',
+    component: () => import('@/views/Integration/Integration.vue'),
+  },
 ]
 
 const router = createRouter({

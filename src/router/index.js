@@ -111,6 +111,11 @@ const routes = [
     name: 'Integration',
     component: () => import('@/views/Integration/Integration.vue'),
   },
+  {
+    path: '/settings/users',
+    name: 'Pengguna & Peran',
+    component: () => import('@/views/Pengguna/Pengguna.vue'),
+  },
 ]
 
 const router = createRouter({

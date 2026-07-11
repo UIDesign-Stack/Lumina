@@ -1,5 +1,6 @@
 <script setup>
-import { PlusIcon, ArrowUpTrayIcon, ChevronDownIcon } from '@heroicons/vue/24/outline'
+import { ref } from 'vue'
+import { PlusIcon, ArrowUpTrayIcon } from '@heroicons/vue/24/outline'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import ExpenseSummaryCard from '@/components/Transactions/ExpenseSummaryCard.vue'
 import ExpenseTrendChart from '@/components/Transactions/ExpenseTrendChart.vue'
@@ -8,6 +9,7 @@ import TopExpensesList from '@/components/Transactions/TopExpensesList.vue'
 import ExpenseSummaryList from '@/components/Transactions/ExpenseSummaryList.vue'
 import InsightCard from '@/components/Transactions/InsightCard.vue'
 import ExpenseTable from '@/components/Transactions/ExpenseTable.vue'
+import ExpenseFormModal from '@/components/Transactions/ExpenseFormModal.vue'
 import { usePengeluaranData } from '@/composables/usePengeluaranData'
 import { useTheme } from '@/composables/useTheme'
 
@@ -22,6 +24,13 @@ const {
   tableRows,
 } = usePengeluaranData()
 const { isDark } = useTheme()
+
+const showNewExpenseModal = ref(false)
+
+function handleExpenseSubmit(payload) {
+  // TODO: kirim payload ke API / composable untuk disimpan
+  console.log('Pengeluaran baru:', payload)
+}
 </script>
 
 <template>
@@ -41,10 +50,12 @@ const { isDark } = useTheme()
           <ArrowUpTrayIcon class="w-4 h-4" />
           Import Data
         </button>
-        <button class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white text-sm font-medium shadow-lg shadow-rose-900/30 transition">
+        <button
+          class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white text-sm font-medium shadow-lg shadow-rose-900/30 transition"
+          @click="showNewExpenseModal = true"
+        >
           <PlusIcon class="w-4 h-4" />
           Pengeluaran Baru
-          <ChevronDownIcon class="w-4 h-4 opacity-80" />
         </button>
       </div>
     </div>
@@ -92,5 +103,11 @@ const { isDark } = useTheme()
         />
       </div>
     </div>
+
+    <ExpenseFormModal
+      :open="showNewExpenseModal"
+      @close="showNewExpenseModal = false"
+      @submit="handleExpenseSubmit"
+    />
   </DashboardLayout>
 </template>

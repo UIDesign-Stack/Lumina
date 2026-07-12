@@ -10,6 +10,7 @@ import FinancialReportTable from '@/components/Report/FinancialReportTable.vue'
 import RecentReportsList from '@/components/Report/RecentReportsList.vue'
 import FinancialInsightCard from '@/components/Report/FinancialInsightCard.vue'
 import CategoryDonutChart from '@/components/Transactions/CategoryDonutChart.vue'
+import ReportFormModal from '@/components/Report/ReportFormModal.vue'
 import { useLaporanKeuanganData } from '@/composables/useLaporanKeuanganData'
 import { useTheme } from '@/composables/useTheme'
 
@@ -29,6 +30,13 @@ const { isDark } = useTheme()
 
 const activeTab = ref(tabs[0])
 const compareValue = ref(compareOptions[0])
+
+const showNewReportModal = ref(false)
+
+function handleReportSubmit(payload) {
+  // TODO: kirim payload ke API / composable untuk membuat laporan baru
+  console.log('Laporan baru:', payload)
+}
 </script>
 
 <template>
@@ -40,7 +48,10 @@ const compareValue = ref(compareOptions[0])
         <p class="text-sm mt-1" :class="isDark ? 'text-gray-400' : 'text-gray-500'">Pantau dan analisis kondisi keuangan perusahaan secara menyeluruh.</p>
       </div>
 
-      <button class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition">
+      <button
+        @click="showNewReportModal = true"
+        class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition"
+      >
         <PlusIcon class="w-4 h-4" />
         Buat Laporan Baru
         <ChevronDownIcon class="w-4 h-4 opacity-80" />
@@ -95,5 +106,11 @@ const compareValue = ref(compareOptions[0])
         <FinancialInsightCard :insights="insights" period="Mei 2024" />
       </div>
     </div>
+
+    <ReportFormModal
+      :open="showNewReportModal"
+      @close="showNewReportModal = false"
+      @submit="handleReportSubmit"
+    />
   </DashboardLayout>
 </template>

@@ -17,9 +17,12 @@ const { isDark } = useTheme()
     <p class="text-sm mb-4" :class="isDark ? 'text-gray-400' : 'text-gray-500'">
       Pelajari cara menghubungkan integrasi atau hubungi tim support kami.
     </p>
-    <button class="w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium transition">
+    <router-link
+      to="/pusat-bantuan"
+      class="w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium transition"
+    >
       Pusat Bantuan
       <ArrowTopRightOnSquareIcon class="w-3.5 h-3.5" />
-    </button>
+    </router-link>
   </div>
 </template>

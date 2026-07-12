@@ -8,24 +8,22 @@ import IntegrationSection from '@/components/Integration/IntegrationSection.vue'
 import CategoryFilterList from '@/components/Integration/CategoryFilterList.vue'
 import HelpCard from '@/components/Integration/HelpCard.vue'
 import IntegrationActivityList from '@/components/Integration/IntegrationActivityList.vue'
-import IntegrationInfoBanner from '@/components/Integration/IntegrationInfoBanner.vue'
 import { useIntegrasiData } from '@/composables/useIntegrasiData'
 import { useTheme } from '@/composables/useTheme'
+
+const router = useRouter()
 
 const {
   tabs,
   statCards,
-  connected,
-  actionNeeded,
   notConnected,
   categories,
   recentActivity,
-  infoBanner,
 } = useIntegrasiData()
 const { isDark } = useTheme()
-const router = useRouter()
 
-const activeTab = ref(tabs[0])
+// Tab aktif untuk halaman ini
+const activeTab = ref('Tersedia')
 const activeCategory = ref(categories[0].key)
 
 // Peta nama tab ke route, sesuaikan dengan nama route di router kamu
@@ -38,12 +36,10 @@ const TAB_ROUTES = {
 function handleTabChange(tab) {
   activeTab.value = tab
   const target = TAB_ROUTES[tab]
-  // Halaman "Semua Integrasi" tetap di halaman ini, tab lain navigasi ke halaman terpisah
-  if (target && tab !== 'Semua Integrasi') router.push(target)
+  if (target) router.push(target)
 }
 
 function handlePrimaryAction(item) {
-
   console.log('Aksi integrasi:', item)
 }
 </script>
@@ -55,7 +51,6 @@ function handlePrimaryAction(item) {
       <h1 class="text-2xl font-bold" :class="isDark ? 'text-white' : 'text-gray-900'">Integrasi</h1>
       <p class="text-sm mt-1" :class="isDark ? 'text-gray-400' : 'text-gray-500'">Hubungkan Lumina Finance dengan aplikasi dan layanan pihak ketiga.</p>
     </div>
-
 
     <div class="mb-6">
       <ReconciliationTabs :tabs="tabs" :active-tab="activeTab" @update:active-tab="handleTabChange" />
@@ -76,27 +71,15 @@ function handlePrimaryAction(item) {
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <div class="lg:col-span-2 space-y-4">
         <IntegrationSection
-          title="Integrasi Terhubung"
-          :items="connected"
-          variant="connected"
-          @primary-action="handlePrimaryAction"
-        />
-
-        <IntegrationSection
-          title="Perlu Tindakan"
-          :items="actionNeeded"
-          variant="action"
-          @primary-action="handlePrimaryAction"
-        />
-
-        <IntegrationSection
-          title="Tidak Terhubung"
+          title="Integrasi Tersedia"
           :items="notConnected"
           variant="disconnected"
           @primary-action="handlePrimaryAction"
         />
 
-        <IntegrationInfoBanner :text="infoBanner.text" :link-text="infoBanner.linkText" />
+        <p v-if="notConnected.length === 0" class="text-sm text-center py-8" :class="isDark ? 'text-gray-500' : 'text-gray-400'">
+          Semua integrasi yang tersedia sudah terhubung.
+        </p>
       </div>
 
       <div class="space-y-4">

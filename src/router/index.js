@@ -112,6 +112,21 @@ const routes = [
     component: () => import('@/views/Integration/Integration.vue'),
   },
   {
+    path: '/integrasi/terhubung',
+    name: 'integrasi-terhubung',
+    component: () => import('@/components/Integration/IntegrasiTerhubung.vue'),
+  },
+  {
+    path: '/integrasi/tersedia',
+    name: 'integrasi-tersedia',
+    component: () => import('@/components/Integration/IntegrasiTersedia.vue'),
+  },
+  {
+    path: '/pusat-bantuan',
+    name: 'pusat-bantuan',
+    component: () => import('@/components/Integration/PusatBantuan.vue'),
+  },
+  {
     path: '/settings/users',
     name: 'Pengguna & Peran',
     component: () => import('@/views/Pengguna/Pengguna.vue'),

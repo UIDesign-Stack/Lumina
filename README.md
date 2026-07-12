@@ -1,7 +1,7 @@
 ![Dashboard Light Mode](./docs/screenshots/light-dashboard.png)
-![Dashboard Light Mode](./docs/screenshots/Dark-Dashboard.png)
-![Dashboard Light Mode](./docs/screenshots/login-light.png)
-![Dashboard Light Mode](./docs/screenshots/dark-login.png)
+![Dashboard Dark Mode](./docs/screenshots/Dark-DashBoard.png)
+![Login Light Mode](./docs/screenshots/Login-light.png)
+![Login Dark Mode](./docs/screenshots/dark-login.png)
 
 # Lumina
 

@@ -9,6 +9,8 @@ import UserTable from '@/components/Pengguna/UserTable.vue'
 import PopularRolesCard from '@/components/Pengguna/PopularRolesCard.vue'
 import UserActivityList from '@/components/Pengguna/UserActivityList.vue'
 import SecurityBanner from '@/components/Pengguna/SecurityBanner.vue'
+import InviteUserModal from '@/components/Pengguna/InviteUserModal.vue'
+import ManageRolesModal from '@/components/Pengguna/ManageRolesModal.vue'
 import { usePenggunaData } from '@/composables/usePenggunaData'
 import { useTheme } from '@/composables/useTheme'
 
@@ -47,16 +49,39 @@ const filteredUsers = computed(() => {
   })
 })
 
+const showInviteModal = ref(false)
+const showManageRolesModal = ref(false)
+
 function handleInviteUser() {
-  console.log('Undang pengguna')
+  showInviteModal.value = true
 }
 
 function handleManageRoles() {
-  console.log('Kelola peran')
+  showManageRolesModal.value = true
 }
 
 function handleRowMenu(user) {
   console.log('Aksi untuk pengguna:', user)
+}
+
+function handleInviteSubmit(payload) {
+  // TODO: kirim payload ke API untuk mengirim undangan pengguna
+  console.log('Undangan dikirim:', payload)
+}
+
+function handleCreateRole(payload) {
+  // TODO: kirim payload ke API untuk membuat peran baru
+  console.log('Peran baru dibuat:', payload)
+}
+
+function handleUpdateRole(payload) {
+  // TODO: kirim payload ke API untuk memperbarui peran
+  console.log('Peran diperbarui:', payload)
+}
+
+function handleDeleteRole(role) {
+  // TODO: kirim request ke API untuk menghapus peran
+  console.log('Peran dihapus:', role)
 }
 </script>
 
@@ -143,5 +168,21 @@ function handleRowMenu(user) {
         Tab "Peran" belum diimplementasikan.
       </div>
     </template>
+
+    <InviteUserModal
+      :open="showInviteModal"
+      :role-options="roleOptions"
+      @close="showInviteModal = false"
+      @submit="handleInviteSubmit"
+    />
+
+    <ManageRolesModal
+      :open="showManageRolesModal"
+      :roles="popularRoles"
+      @close="showManageRolesModal = false"
+      @create-role="handleCreateRole"
+      @update-role="handleUpdateRole"
+      @delete-role="handleDeleteRole"
+    />
   </DashboardLayout>
 </template>

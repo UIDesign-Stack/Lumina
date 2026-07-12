@@ -8,6 +8,7 @@ import LedgerTable from '@/components/Ledger/LedgerTable.vue'
 import AccountSummaryList from '@/components/Ledger/AccountSummaryList.vue'
 import LedgerActivityList from '@/components/Ledger/LedgerActivityList.vue'
 import LedgerInfoBanner from '@/components/Ledger/LedgerInfoBanner.vue'
+import LedgerExportModal from '@/components/Ledger/LedgerExportModal.vue'
 import { useBukuBesarData } from '@/composables/useBukuBesarData'
 import { useTheme } from '@/composables/useTheme'
 
@@ -46,6 +47,13 @@ const filteredRows = computed(() => {
 watch([accountValue, categoryValue, projectValue, searchQuery], () => {
   currentPage.value = 1
 })
+
+const showExportModal = ref(false)
+
+function handleExportSubmit(payload) {
+  // TODO: kirim payload ke API / composable untuk memproses export buku besar
+  console.log('Export buku besar:', payload)
+}
 </script>
 
 <template>
@@ -57,7 +65,10 @@ watch([accountValue, categoryValue, projectValue, searchQuery], () => {
         <p class="text-sm mt-1" :class="isDark ? 'text-gray-400' : 'text-gray-500'">Lihat seluruh transaksi keuangan berdasarkan akun secara detail dan menyeluruh.</p>
       </div>
 
-      <button class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition">
+      <button
+        @click="showExportModal = true"
+        class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition"
+      >
         <ArrowUpTrayIcon class="w-4 h-4" />
         Export Buku Besar
         <ChevronDownIcon class="w-4 h-4 opacity-80" />
@@ -105,6 +116,13 @@ watch([accountValue, categoryValue, projectValue, searchQuery], () => {
       </div>
     </div>
 
-    
+    <LedgerExportModal
+      :open="showExportModal"
+      :account-options="accountOptions"
+      :category-options="categoryOptions"
+      :project-options="projectOptions"
+      @close="showExportModal = false"
+      @submit="handleExportSubmit"
+    />
   </DashboardLayout>
 </template>

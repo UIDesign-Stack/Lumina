@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { PlusIcon, ChevronDownIcon } from '@heroicons/vue/24/outline'
+import { PlusIcon } from '@heroicons/vue/24/outline'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import BudgetSummaryCard from '@/components/Budget/BudgetSummaryCard.vue'
 import ReconciliationTabs from '@/components/Reconciliation/ReconciliationTabs.vue'
@@ -9,6 +9,7 @@ import AccountTable from '@/components/Account/AccountTable.vue'
 import BalanceByTypeList from '@/components/Account/BalanceByTypeList.vue'
 import CategorySplitDonut from '@/components/Category/CategorySplitDonut.vue'
 import CategoryTipCard from '@/components/Category/CategoryTipCard.vue'
+import AccountFormModal from '@/components/Account/AccountFormModal.vue'
 import { useAkunData } from '@/composables/useAkunData'
 import { useTheme } from '@/composables/useTheme'
 
@@ -36,6 +37,13 @@ const filteredAccounts = computed(() => {
 function resetPage() {
   currentPage.value = 1
 }
+
+const showNewAccountModal = ref(false)
+
+function handleAccountSubmit(payload) {
+  // TODO: kirim payload ke API / composable untuk menyimpan akun baru
+  console.log('Akun baru:', payload)
+}
 </script>
 
 <template>
@@ -47,10 +55,12 @@ function resetPage() {
         <p class="text-sm mt-1" :class="isDark ? 'text-gray-400' : 'text-gray-500'">Kelola akun dan rekening perusahaan untuk memudahkan pencatatan dan pelaporan keuangan.</p>
       </div>
 
-      <button class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition">
+      <button
+        class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition"
+        @click="showNewAccountModal = true"
+      >
         <PlusIcon class="w-4 h-4" />
         Tambah Akun Baru
-        <ChevronDownIcon class="w-4 h-4 opacity-80" />
       </button>
     </div>
 
@@ -97,5 +107,11 @@ function resetPage() {
         <CategoryTipCard heading="Tips" :tip="tip" />
       </div>
     </div>
+
+    <AccountFormModal
+      :open="showNewAccountModal"
+      @close="showNewAccountModal = false"
+      @submit="handleAccountSubmit"
+    />
   </DashboardLayout>
 </template>

@@ -70,8 +70,6 @@ export function usePengaturanData() {
     { key: 'dailySummary', icon: 'calendar', label: 'Ringkasan Harian', description: 'Terima ringkasan aktivitas harian melalui email.', enabled: true },
   ])
 
-  // Profil Perusahaan (tab "Perusahaan")
-  // Pengaturan Akun & Rekening (tab "Akun & Rekening")
   const accountSettings = ref({
     rekeningDefault: 'Kas Utama',
     tampilkanSaldoDashboard: true,
@@ -87,6 +85,57 @@ export function usePengaturanData() {
     'BNI - 5647382910',
   ]
 
+  // Pengaturan Pajak (tab "Pajak")
+  const taxSettings = ref({
+    statusPKP: true,
+    nomorPengukuhanPKP: 'S-1234/PKP/WPJ.07/2020',
+    tarifPPNDefault: '11%',
+    metodePajak: 'Tidak Termasuk Pajak (Exclusive)',
+    pengingatJatuhTempo: true,
+    hariSebelumJatuhTempo: '7',
+  })
+
+  // Pengaturan Notifikasi Lanjutan (tab "Notifikasi")
+  const notificationChannels = ref([
+    { key: 'email', icon: 'mail', label: 'Email', description: 'Kirim notifikasi ke alamat email terdaftar.', enabled: true },
+    { key: 'pushBrowser', icon: 'bell', label: 'Push Browser', description: 'Tampilkan notifikasi langsung di browser.', enabled: true },
+    { key: 'sms', icon: 'sms', label: 'SMS', description: 'Kirim notifikasi penting melalui SMS.', enabled: false },
+  ])
+
+  const moduleNotifications = ref([
+    { key: 'transaksi', label: 'Transaksi', enabled: true },
+    { key: 'laporanKeuangan', label: 'Laporan Keuangan', enabled: true },
+    { key: 'integrasi', label: 'Integrasi', enabled: true },
+    { key: 'penggunaPeran', label: 'Pengguna & Peran', enabled: false },
+    { key: 'auditLog', label: 'Audit Log', enabled: false },
+  ])
+
+  const digestFrequency = ref('Harian')
+  const digestFrequencyOptions = ['Harian', 'Mingguan', 'Bulanan', 'Tidak Pernah']
+
+  const quietHours = ref({
+    enabled: false,
+    mulai: '22:00',
+    selesai: '07:00',
+  })
+
+  // Kebijakan Keamanan Perusahaan (tab "Keamanan")
+  const securityPolicy = ref({
+    wajib2FA: false,
+    panjangMinimalSandi: '8',
+    wajibKombinasiSandi: true,
+    masaBerlakuSandi: 'Tidak Pernah',
+    batasPercobaanLogin: '5',
+    durasiKunciAkun: '15 menit',
+    waktuLogoutOtomatis: '1 jam',
+    batasiAksesIP: false,
+    daftarIPDiizinkan: '',
+  })
+
+  const masaBerlakuSandiOptions = ['30 hari', '60 hari', '90 hari', 'Tidak Pernah']
+  const durasiKunciOptions = ['5 menit', '15 menit', '30 menit', '1 jam']
+  const waktuLogoutOptions = ['15 menit', '30 menit', '1 jam', '4 jam', 'Tidak Pernah']
+
   const companyProfile = ref({
     logo: '',
     nama: 'PT Lumina Finansial Indonesia',
@@ -99,9 +148,9 @@ export function usePengaturanData() {
   })
 
   const accountInfo = {
-    name: 'Fajar Ardiansyah',
+    name: 'FajarDev',
     role: 'Finance Manager',
-    email: 'fajar.ardiansyah@lumina.id',
+    email: 'fajar.Dev@lumina.id',
     avatar: '',
   }
 
@@ -126,6 +175,16 @@ export function usePengaturanData() {
     companyProfile,
     accountSettings,
     accountOptionsList,
+    taxSettings,
+    notificationChannels,
+    moduleNotifications,
+    digestFrequency,
+    digestFrequencyOptions,
+    quietHours,
+    securityPolicy,
+    masaBerlakuSandiOptions,
+    durasiKunciOptions,
+    waktuLogoutOptions,
     accountInfo,
     aboutApp,
     quickActions,

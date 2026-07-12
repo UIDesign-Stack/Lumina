@@ -6,6 +6,9 @@ import GeneralPreferencesCard from '@/components/Settings/GeneralPreferencesCard
 import ToggleSettingsCard from '@/components/Settings/ToggleSettingsCard.vue'
 import CompanyProfileCard from '@/components/Settings/CompanyProfileCard.vue'
 import AccountSettingsCard from '@/components/Settings/AccountSettingsCard.vue'
+import TaxSettingsCard from '@/components/Settings/TaxSettingsCard.vue'
+import NotificationSettingsCard from '@/components/Settings/NotificationSettingsCard.vue'
+import SecurityPolicyCard from '@/components/Settings/SecurityPolicyCard.vue'
 import AccountInfoCard from '@/components/Settings/AccountInfoCard.vue'
 import AboutAppCard from '@/components/Settings/AboutAppCard.vue'
 import QuickActionsCard from '@/components/Settings/QuickActionsCard.vue'
@@ -22,6 +25,16 @@ const {
   companyProfile,
   accountSettings,
   accountOptionsList,
+  taxSettings,
+  notificationChannels,
+  moduleNotifications,
+  digestFrequency,
+  digestFrequencyOptions,
+  quietHours,
+  securityPolicy,
+  masaBerlakuSandiOptions,
+  durasiKunciOptions,
+  waktuLogoutOptions,
   accountInfo,
   aboutApp,
   quickActions,
@@ -39,6 +52,12 @@ const defaults = {
   notificationSettings: JSON.parse(JSON.stringify(notificationSettings.value)),
   companyProfile: JSON.parse(JSON.stringify(companyProfile.value)),
   accountSettings: JSON.parse(JSON.stringify(accountSettings.value)),
+  taxSettings: JSON.parse(JSON.stringify(taxSettings.value)),
+  notificationChannels: JSON.parse(JSON.stringify(notificationChannels.value)),
+  moduleNotifications: JSON.parse(JSON.stringify(moduleNotifications.value)),
+  digestFrequency: digestFrequency.value,
+  quietHours: JSON.parse(JSON.stringify(quietHours.value)),
+  securityPolicy: JSON.parse(JSON.stringify(securityPolicy.value)),
 }
 
 const feedback = ref(null) // { type: 'success' | 'error', message: string }
@@ -103,6 +122,12 @@ function handleSave() {
     notificationSettings: notificationSettings.value,
     companyProfile: companyProfile.value,
     accountSettings: accountSettings.value,
+    taxSettings: taxSettings.value,
+    notificationChannels: notificationChannels.value,
+    moduleNotifications: moduleNotifications.value,
+    digestFrequency: digestFrequency.value,
+    quietHours: quietHours.value,
+    securityPolicy: securityPolicy.value,
   })
   // TODO: kirim ke API untuk menyimpan pengaturan
   showFeedback('success', 'Pengaturan berhasil disimpan.')
@@ -166,6 +191,12 @@ function confirmReset() {
   notificationSettings.value = JSON.parse(JSON.stringify(defaults.notificationSettings))
   companyProfile.value = JSON.parse(JSON.stringify(defaults.companyProfile))
   accountSettings.value = JSON.parse(JSON.stringify(defaults.accountSettings))
+  taxSettings.value = JSON.parse(JSON.stringify(defaults.taxSettings))
+  notificationChannels.value = JSON.parse(JSON.stringify(defaults.notificationChannels))
+  moduleNotifications.value = JSON.parse(JSON.stringify(defaults.moduleNotifications))
+  digestFrequency.value = defaults.digestFrequency
+  quietHours.value = JSON.parse(JSON.stringify(defaults.quietHours))
+  securityPolicy.value = JSON.parse(JSON.stringify(defaults.securityPolicy))
   // TODO: kirim reset ke API supaya tersimpan permanen, bukan hanya lokal
   showResetConfirm.value = false
   showFeedback('success', 'Pengaturan berhasil dikembalikan ke default.')
@@ -228,6 +259,33 @@ function confirmReset() {
         <!-- Tab: Akun & Rekening -->
         <template v-else-if="activeTab === 'Akun & Rekening'">
           <AccountSettingsCard :settings="accountSettings" :account-options="accountOptionsList" />
+        </template>
+
+        <!-- Tab: Pajak -->
+        <template v-else-if="activeTab === 'Pajak'">
+          <TaxSettingsCard :settings="taxSettings" />
+        </template>
+
+        <!-- Tab: Notifikasi -->
+        <template v-else-if="activeTab === 'Notifikasi'">
+          <NotificationSettingsCard
+            :channels="notificationChannels"
+            :modules="moduleNotifications"
+            :digest-frequency="digestFrequency"
+            :digest-frequency-options="digestFrequencyOptions"
+            :quiet-hours="quietHours"
+            @update:digest-frequency="digestFrequency = $event"
+          />
+        </template>
+
+        <!-- Tab: Keamanan -->
+        <template v-else-if="activeTab === 'Keamanan'">
+          <SecurityPolicyCard
+            :policy="securityPolicy"
+            :masa-berlaku-sandi-options="masaBerlakuSandiOptions"
+            :durasi-kunci-options="durasiKunciOptions"
+            :waktu-logout-options="waktuLogoutOptions"
+          />
         </template>
 
         <!-- Tab lain: belum tersedia -->

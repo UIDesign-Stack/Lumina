@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { PlusIcon, ChevronDownIcon } from '@heroicons/vue/24/outline'
+import { PlusIcon } from '@heroicons/vue/24/outline'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import BudgetSummaryCard from '@/components/Budget/BudgetSummaryCard.vue'
 import ProjectTabsBar from '@/components/Project/ProjectTabsBar.vue'
@@ -8,6 +8,7 @@ import ThirdPartyTable from '@/components/ThirdParty/ThirdPartyTable.vue'
 import CategorySplitDonut from '@/components/Category/CategorySplitDonut.vue'
 import TopProjectsList from '@/components/Project/TopProjectsList.vue'
 import CategoryTipCard from '@/components/Category/CategoryTipCard.vue'
+import ThirdPartyFormModal from '@/components/ThirdParty/ThirdPartyFormModal.vue'
 import { usePihakKetigaData } from '@/composables/usePihakKetigaData'
 import { useTheme } from '@/composables/useTheme'
 
@@ -35,6 +36,13 @@ function handleSearchChange(q) {
   searchQuery.value = q
   currentPage.value = 1
 }
+
+const showNewPartnerModal = ref(false)
+
+function handlePartnerSubmit(payload) {
+  // TODO: kirim payload ke API / composable untuk menyimpan pihak ketiga baru
+  console.log('Pihak ketiga baru:', payload)
+}
 </script>
 
 <template>
@@ -46,10 +54,12 @@ function handleSearchChange(q) {
         <p class="text-sm mt-1" :class="isDark ? 'text-gray-400' : 'text-gray-500'">Kelola data pihak ketiga seperti vendor, pelanggan, konsultan, dan lainnya.</p>
       </div>
 
-      <button class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition">
+      <button
+        class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition"
+        @click="showNewPartnerModal = true"
+      >
         <PlusIcon class="w-4 h-4" />
         Tambah Pihak Ketiga
-        <ChevronDownIcon class="w-4 h-4 opacity-80" />
       </button>
     </div>
 
@@ -94,5 +104,11 @@ function handleSearchChange(q) {
         <CategoryTipCard heading="Informasi" :tip="tip" />
       </div>
     </div>
+
+    <ThirdPartyFormModal
+      :open="showNewPartnerModal"
+      @close="showNewPartnerModal = false"
+      @submit="handlePartnerSubmit"
+    />
   </DashboardLayout>
 </template>

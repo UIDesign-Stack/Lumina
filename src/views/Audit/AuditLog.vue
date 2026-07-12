@@ -8,6 +8,7 @@ import ActivitySummaryDonut from '@/components/Audit/ActivitySummaryDonut.vue'
 import AuditFilterSidebar from '@/components/Audit/AuditFilterSidebar.vue'
 import AuditInfoCard from '@/components/Audit/AuditInfoCard.vue'
 import ExportAuditButton from '@/components/Audit/ExportAuditButton.vue'
+import AuditLogDetailModal from '@/components/Audit/AuditLogDetailModal.vue'
 import { useAuditData } from '@/composables/useAuditData'
 import { useTheme } from '@/composables/useTheme'
 
@@ -65,6 +66,14 @@ function handleApplyFilter() {
   currentPage.value = 1
   console.log('Filter diterapkan')
 }
+
+const selectedLog = ref(null)
+const showDetailModal = ref(false)
+
+function handleViewLogDetail(log) {
+  selectedLog.value = log
+  showDetailModal.value = true
+}
 </script>
 
 <template>
@@ -111,6 +120,7 @@ function handleApplyFilter() {
           :per-page="pagination.perPage"
           :total-data="pagination.totalData"
           @update:current-page="currentPage = $event"
+          @view-detail="handleViewLogDetail"
         />
       </div>
 
@@ -142,5 +152,11 @@ function handleApplyFilter() {
         />
       </div>
     </div>
+
+    <AuditLogDetailModal
+      :open="showDetailModal"
+      :log="selectedLog"
+      @close="showDetailModal = false"
+    />
   </DashboardLayout>
 </template>

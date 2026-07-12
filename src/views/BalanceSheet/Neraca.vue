@@ -8,6 +8,8 @@ import BalanceSheetPanel from '@/components/BalanceSheet/BalanceSheetPanel.vue'
 import BalanceCheckCard from '@/components/BalanceSheet/BalanceCheckCard.vue'
 import CategoryDonutChart from '@/components/Transactions/CategoryDonutChart.vue'
 import RecentReportsList from '@/components/Report/RecentReportsList.vue'
+import BalanceSheetReportModal from '@/components/BalanceSheet/BalanceSheetReportModal.vue'
+import BalanceSheetExportModal from '@/components/BalanceSheet/BalanceSheetExportModal.vue'
 import { useNeracaData } from '@/composables/useNeracaData'
 import { useTheme } from '@/composables/useTheme'
 
@@ -29,6 +31,19 @@ const {
 const { isDark } = useTheme()
 
 const compareValue = ref(compareOptions[0])
+
+const showReportModal = ref(false)
+const showExportModal = ref(false)
+
+function handleReportSubmit(payload) {
+  // TODO: kirim payload ke API / composable untuk membuat laporan neraca baru
+  console.log('Laporan neraca baru:', payload)
+}
+
+function handleExportSubmit(payload) {
+  // TODO: kirim payload ke API / composable untuk export laporan neraca saat ini
+  console.log('Export laporan neraca:', payload)
+}
 </script>
 
 <template>
@@ -40,7 +55,10 @@ const compareValue = ref(compareOptions[0])
         <p class="text-sm mt-1" :class="isDark ? 'text-gray-400' : 'text-gray-500'">Ringkasan posisi keuangan perusahaan pada periode tertentu.</p>
       </div>
 
-      <button class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition">
+      <button
+        @click="showReportModal = true"
+        class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition"
+      >
         <PlusIcon class="w-4 h-4" />
         Buat Laporan Neraca
         <ChevronDownIcon class="w-4 h-4 opacity-80" />
@@ -62,6 +80,7 @@ const compareValue = ref(compareOptions[0])
     <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 mb-6">
       <ReportFilterBar :period="period" v-model:compare-value="compareValue" :compare-options="compareOptions" />
       <button
+        @click="showExportModal = true"
         class="flex items-center gap-2 px-3.5 py-2 rounded-xl border text-sm whitespace-nowrap flex-shrink-0 transition"
         :class="isDark ? 'border-white/10 text-gray-300 hover:bg-white/5' : 'border-gray-300 text-gray-700 hover:bg-gray-50'"
       >
@@ -116,5 +135,18 @@ const compareValue = ref(compareOptions[0])
         <RecentReportsList :reports="recentReports" title="Laporan Neraca Terbaru" />
       </div>
     </div>
+
+    <BalanceSheetReportModal
+      :open="showReportModal"
+      @close="showReportModal = false"
+      @submit="handleReportSubmit"
+    />
+
+    <BalanceSheetExportModal
+      :open="showExportModal"
+      :period-label="compareValue"
+      @close="showExportModal = false"
+      @submit="handleExportSubmit"
+    />
   </DashboardLayout>
 </template>

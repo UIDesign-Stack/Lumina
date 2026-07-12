@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { PlusIcon, ArrowUpTrayIcon, ChevronDownIcon } from '@heroicons/vue/24/outline'
+import { PlusIcon, ArrowUpTrayIcon } from '@heroicons/vue/24/outline'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import BalanceCard from '@/components/Reconciliation/BalanceCard.vue'
 import MatchStatusCard from '@/components/Reconciliation/MatchStatusCard.vue'
@@ -12,6 +12,7 @@ import ReconciliationProgressCard from '@/components/Reconciliation/Reconciliati
 import ReconciliationTasksCard from '@/components/Reconciliation/ReconciliationTasksCard.vue'
 import RecentActivityCard from '@/components/Reconciliation/RecentActivityCard.vue'
 import ReconciliationTipCard from '@/components/Reconciliation/ReconciliationTipCard.vue'
+import ReconciliationFormModal from '@/components/Reconciliation/ReconciliationFormModal.vue'
 import { useRekonsiliasiData } from '@/composables/useRekonsiliasiData'
 import { useTheme } from '@/composables/useTheme'
 
@@ -31,6 +32,12 @@ const {
 const { isDark } = useTheme()
 
 const activeTab = ref(tabs[0])
+const showNewReconciliationModal = ref(false)
+
+function handleReconciliationSubmit(payload) {
+  // TODO: kirim payload ke API / composable untuk memulai sesi rekonsiliasi baru
+  console.log('Rekonsiliasi baru:', payload)
+}
 </script>
 
 <template>
@@ -50,10 +57,12 @@ const activeTab = ref(tabs[0])
           <ArrowUpTrayIcon class="w-4 h-4" />
           Impor Data Bank
         </button>
-        <button class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition">
+        <button
+          class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition"
+          @click="showNewReconciliationModal = true"
+        >
           <PlusIcon class="w-4 h-4" />
           Buat Rekonsiliasi Baru
-          <ChevronDownIcon class="w-4 h-4 opacity-80" />
         </button>
       </div>
     </div>
@@ -96,5 +105,11 @@ const activeTab = ref(tabs[0])
         <ReconciliationTipCard :tip="tip" />
       </div>
     </div>
+
+    <ReconciliationFormModal
+      :open="showNewReconciliationModal"
+      @close="showNewReconciliationModal = false"
+      @submit="handleReconciliationSubmit"
+    />
   </DashboardLayout>
 </template>

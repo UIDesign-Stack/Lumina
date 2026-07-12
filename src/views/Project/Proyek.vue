@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { PlusIcon, ChevronDownIcon } from '@heroicons/vue/24/outline'
+import { PlusIcon } from '@heroicons/vue/24/outline'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import BudgetSummaryCard from '@/components/Budget/BudgetSummaryCard.vue'
 import ProjectTabsBar from '@/components/Project/ProjectTabsBar.vue'
@@ -10,6 +10,7 @@ import TopProjectsList from '@/components/Project/TopProjectsList.vue'
 import CategoryDonutChart from '@/components/Transactions/CategoryDonutChart.vue'
 import CategorySplitDonut from '@/components/Category/CategorySplitDonut.vue'
 import CategoryTipCard from '@/components/Category/CategoryTipCard.vue'
+import ProjectFormModal from '@/components/Project/ProjectFormModal.vue'
 import { useProyekData } from '@/composables/useProyekData'
 import { useTheme } from '@/composables/useTheme'
 
@@ -55,6 +56,13 @@ function handleSearchChange(q) {
   searchQuery.value = q
   currentPage.value = 1
 }
+
+const showNewProjectModal = ref(false)
+
+function handleProjectSubmit(payload) {
+  // TODO: kirim payload ke API / composable untuk menyimpan proyek baru
+  console.log('Proyek baru:', payload)
+}
 </script>
 
 <template>
@@ -66,10 +74,12 @@ function handleSearchChange(q) {
         <p class="text-sm mt-1" :class="isDark ? 'text-gray-400' : 'text-gray-500'">Kelola proyek dan pantau anggaran, realisasi, serta profitabilitas setiap proyek.</p>
       </div>
 
-      <button class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition">
+      <button
+        class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition"
+        @click="showNewProjectModal = true"
+      >
         <PlusIcon class="w-4 h-4" />
         Tambah Proyek Baru
-        <ChevronDownIcon class="w-4 h-4 opacity-80" />
       </button>
     </div>
 
@@ -127,5 +137,11 @@ function handleSearchChange(q) {
         <CategoryTipCard heading="Informasi" :tip="tip" />
       </div>
     </div>
+
+    <ProjectFormModal
+      :open="showNewProjectModal"
+      @close="showNewProjectModal = false"
+      @submit="handleProjectSubmit"
+    />
   </DashboardLayout>
 </template>

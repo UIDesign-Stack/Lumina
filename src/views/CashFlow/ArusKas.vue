@@ -9,6 +9,7 @@ import CategoryDonutChart from '@/components/Transactions/CategoryDonutChart.vue
 import CashActivityList from '@/components/CashFlow/CashActivityList.vue'
 import CashFlowTable from '@/components/CashFlow/CashFlowTable.vue'
 import CategoryTipCard from '@/components/Category/CategoryTipCard.vue'
+import CashFlowFormModal from '@/components/CashFlow/CashFlowFormModal.vue'
 import { useArusKasData } from '@/composables/useArusKasData'
 import { useTheme } from '@/composables/useTheme'
 
@@ -28,6 +29,13 @@ const {
 const { isDark } = useTheme()
 
 const compareValue = ref(compareOptions[0])
+
+const showNewReportModal = ref(false)
+
+function handleReportSubmit(payload) {
+  // TODO: kirim payload ke API / composable untuk membuat laporan arus kas baru
+  console.log('Laporan arus kas baru:', payload)
+}
 </script>
 
 <template>
@@ -39,7 +47,10 @@ const compareValue = ref(compareOptions[0])
         <p class="text-sm mt-1" :class="isDark ? 'text-gray-400' : 'text-gray-500'">Pantau arus kas masuk dan keluar perusahaan secara detail dan akurat.</p>
       </div>
 
-      <button class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition">
+      <button
+        @click="showNewReportModal = true"
+        class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition"
+      >
         <PlusIcon class="w-4 h-4" />
         Buat Laporan Arus Kas
         <ChevronDownIcon class="w-4 h-4 opacity-80" />
@@ -112,5 +123,11 @@ const compareValue = ref(compareOptions[0])
         <CategoryTipCard heading="Insight Arus Kas" :tip="tip" />
       </div>
     </div>
+
+    <CashFlowFormModal
+      :open="showNewReportModal"
+      @close="showNewReportModal = false"
+      @submit="handleReportSubmit"
+    />
   </DashboardLayout>
 </template>

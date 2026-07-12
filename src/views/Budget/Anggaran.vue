@@ -11,6 +11,7 @@ import BudgetAlertList from '@/components/Budget/BudgetAlertList.vue'
 import CategoryDonutChart from '@/components/Transactions/CategoryDonutChart.vue'
 import ReconciliationTabs from '@/components/Reconciliation/ReconciliationTabs.vue'
 import InsightCard from '@/components/Transactions/InsightCard.vue'
+import BudgetFormModal from '@/components/Budget/BudgetFormModal.vue'
 import { useAnggaranData } from '@/composables/useAnggaranData'
 import { useTheme } from '@/composables/useTheme'
 
@@ -28,6 +29,12 @@ const {
 const { isDark } = useTheme()
 
 const activeTab = ref(tabs[0])
+const showNewBudgetModal = ref(false)
+
+function handleBudgetSubmit(payload) {
+  // TODO: kirim payload ke API / composable untuk menyimpan anggaran baru
+  console.log('Anggaran baru:', payload)
+}
 </script>
 
 <template>
@@ -47,10 +54,12 @@ const activeTab = ref(tabs[0])
           <ArrowUpTrayIcon class="w-4 h-4" />
           Import Anggaran
         </button>
-        <button class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition">
+        <button
+          class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition"
+          @click="showNewBudgetModal = true"
+        >
           <PlusIcon class="w-4 h-4" />
           Buat Anggaran Baru
-          <ChevronDownIcon class="w-4 h-4 opacity-80" />
         </button>
       </div>
     </div>
@@ -108,5 +117,11 @@ const activeTab = ref(tabs[0])
         />
       </div>
     </div>
+
+    <BudgetFormModal
+      :open="showNewBudgetModal"
+      @close="showNewBudgetModal = false"
+      @submit="handleBudgetSubmit"
+    />
   </DashboardLayout>
 </template>

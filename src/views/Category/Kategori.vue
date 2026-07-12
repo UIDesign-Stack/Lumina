@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { PlusIcon, ChevronDownIcon } from '@heroicons/vue/24/outline'
+import { PlusIcon } from '@heroicons/vue/24/outline'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import BudgetSummaryCard from '@/components/Budget/BudgetSummaryCard.vue'
 import ReconciliationTabs from '@/components/Reconciliation/ReconciliationTabs.vue'
@@ -8,6 +8,7 @@ import CategoryTable from '@/components/Category/CategoryTable.vue'
 import CategorySplitDonut from '@/components/Category/CategorySplitDonut.vue'
 import TopCategoriesList from '@/components/Category/TopCategoriesList.vue'
 import CategoryTipCard from '@/components/Category/CategoryTipCard.vue'
+import CategoryFormModal from '@/components/Category/CategoryFormModal.vue'
 import { useKategoriData } from '@/composables/useKategoriData'
 import { useTheme } from '@/composables/useTheme'
 
@@ -31,6 +32,16 @@ const activeCategories = computed(() =>
 const tableTitle = computed(() =>
   activeTab.value === 'Kategori Pengeluaran' ? 'Daftar Kategori Pengeluaran' : 'Daftar Kategori Pemasukan'
 )
+
+const showNewCategoryModal = ref(false)
+const newCategoryDefaultType = computed(() =>
+  activeTab.value === 'Kategori Pengeluaran' ? 'pengeluaran' : 'pemasukan'
+)
+
+function handleCategorySubmit(payload) {
+  // TODO: kirim payload ke API / composable untuk menyimpan kategori baru
+  console.log('Kategori baru:', payload)
+}
 </script>
 
 <template>
@@ -42,10 +53,12 @@ const tableTitle = computed(() =>
         <p class="text-sm mt-1" :class="isDark ? 'text-gray-400' : 'text-gray-500'">Kelola kategori pemasukan dan pengeluaran untuk memudahkan pencatatan dan pelaporan.</p>
       </div>
 
-      <button class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition">
+      <button
+        class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition"
+        @click="showNewCategoryModal = true"
+      >
         <PlusIcon class="w-4 h-4" />
         Tambah Kategori
-        <ChevronDownIcon class="w-4 h-4 opacity-80" />
       </button>
     </div>
 
@@ -79,5 +92,12 @@ const tableTitle = computed(() =>
         <CategoryTipCard :tip="tip" />
       </div>
     </div>
+
+    <CategoryFormModal
+      :open="showNewCategoryModal"
+      :default-type="newCategoryDefaultType"
+      @close="showNewCategoryModal = false"
+      @submit="handleCategorySubmit"
+    />
   </DashboardLayout>
 </template>

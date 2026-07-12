@@ -70,6 +70,34 @@ export function usePengaturanData() {
     { key: 'dailySummary', icon: 'calendar', label: 'Ringkasan Harian', description: 'Terima ringkasan aktivitas harian melalui email.', enabled: true },
   ])
 
+  // Profil Perusahaan (tab "Perusahaan")
+  // Pengaturan Akun & Rekening (tab "Akun & Rekening")
+  const accountSettings = ref({
+    rekeningDefault: 'Kas Utama',
+    tampilkanSaldoDashboard: true,
+    notifikasiSaldoRendah: true,
+    batasSaldoMinimum: '5000000',
+  })
+
+  // TODO: ganti dengan daftar akun/rekening asli dari useAccountsData atau API
+  const accountOptionsList = [
+    'Kas Utama',
+    'BCA - 1234567890',
+    'Mandiri - 9876543210',
+    'BNI - 5647382910',
+  ]
+
+  const companyProfile = ref({
+    logo: '',
+    nama: 'PT Lumina Finansial Indonesia',
+    npwp: '01.234.567.8-901.000',
+    jenisUsaha: 'Jasa Keuangan',
+    email: 'admin@luminafinance.com',
+    telepon: '021-5551234',
+    website: 'https://luminafinance.com',
+    alamat: 'Jl. Sudirman Kav. 45, Jakarta Selatan, DKI Jakarta 12190',
+  })
+
   const accountInfo = {
     name: 'Fajar Ardiansyah',
     role: 'Finance Manager',
@@ -95,6 +123,9 @@ export function usePengaturanData() {
     generalPreferences,
     displaySettings,
     notificationSettings,
+    companyProfile,
+    accountSettings,
+    accountOptionsList,
     accountInfo,
     aboutApp,
     quickActions,

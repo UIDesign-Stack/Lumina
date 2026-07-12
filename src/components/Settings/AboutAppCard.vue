@@ -22,9 +22,9 @@ const { isDark } = useTheme()
     <p class="text-xs mb-3" :class="isDark ? 'text-gray-500' : 'text-gray-400'">{{ app.version }}</p>
     <p class="text-sm leading-relaxed mb-3" :class="isDark ? 'text-gray-400' : 'text-gray-600'">{{ app.description }}</p>
 
-    <a href="#" class="inline-flex items-center gap-1 text-sm text-purple-400 hover:text-purple-300 transition">
+    <router-link to="/tentang-aplikasi" class="inline-flex items-center gap-1 text-sm text-purple-400 hover:text-purple-300 transition">
       Lihat Rilis Terbaru
       <ArrowRightIcon class="w-3.5 h-3.5" />
-    </a>
+    </router-link>
   </div>
 </template>

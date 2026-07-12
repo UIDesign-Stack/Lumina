@@ -24,8 +24,11 @@ const { isDark } = useTheme()
       </div>
     </div>
 
-    <button class="w-full py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition">
+    <router-link
+      to="/profil"
+      class="w-full block text-center py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium shadow-lg shadow-purple-900/30 transition"
+    >
       Ubah Profil
-    </button>
+    </router-link>
   </div>
 </template>

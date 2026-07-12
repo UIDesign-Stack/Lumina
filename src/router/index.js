@@ -107,14 +107,19 @@ const routes = [
     component: () => import('@/views/Pengaturan/Pengaturan.vue'),
   },
   {
+  path: '/tentang-aplikasi',
+  name: 'tentang-aplikasi',
+  component: () => import('@/Components/Settings/TentangAplikasi.vue'),
+},
+  {
     path: '/profil',
     name: 'profil-saya',
-    component: () => import('@/Components/Settings/ProfilSaya.vue'), // sesuaikan path
+    component: () => import('@/Components/Settings/ProfilSaya.vue'),
   },
   {
     path: '/pengaturan-akun',
     name: 'pengaturan-akun',
-    component: () => import('@/Components/Settings/PengaturanAkun.vue'), // sesuaikan path
+    component: () => import('@/Components/Settings/PengaturanAkun.vue'),
   },
   {
     path: '/settings/integrations',

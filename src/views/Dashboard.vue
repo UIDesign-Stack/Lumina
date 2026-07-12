@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import StatCard from '@/components/Dashboard/StatCard.vue'
 import CashFlowChart from '@/components/Dashboard/CashFlowChart.vue'
@@ -6,6 +7,7 @@ import ExpenseCategoryChart from '@/components/Dashboard/ExpenseCategoryChart.vu
 import RecentTransactions from '@/components/Dashboard/RecentTransactions.vue'
 import BudgetSummary from '@/components/Dashboard/BudgetSummary.vue'
 import AccountsList from '@/components/Dashboard/AccountsList.vue'
+import ExpenseFormModal from '@/components/Transactions/ExpenseFormModal.vue'
 import { useDashboardData } from '@/composables/useDashboardData'
 import { useTheme } from '@/composables/useTheme'
 
@@ -18,8 +20,13 @@ const {
   budgetSummary,
   accounts,
 } = useDashboardData()
-
 const { isDark } = useTheme()
+
+const showNewExpenseModal = ref(false)
+function handleExpenseSubmit(payload) {
+  // TODO: kirim payload ke API / composable untuk disimpan
+  console.log('Pengeluaran baru:', payload)
+}
 </script>
 
 <template>
@@ -30,7 +37,10 @@ const { isDark } = useTheme()
         <h1 class="text-2xl font-semibold" :class="isDark ? 'text-white' : 'text-gray-900'">Dashboard</h1>
         <p class="text-sm text-gray-500 mt-1">Ringkasan keuangan perusahaan Anda hari ini.</p>
       </div>
-      <button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium shadow-lg shadow-purple-900/30 hover:opacity-90 transition self-start sm:self-auto">
+      <button
+          class="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white text-sm font-medium shadow-lg shadow-rose-900/30 transition"
+          @click="showNewExpenseModal = true"
+        >
         + Transaksi Baru
       </button>
     </div>
@@ -59,5 +69,11 @@ const { isDark } = useTheme()
         <AccountsList :accounts="accounts" />
       </div>
     </div>
+
+    <ExpenseFormModal
+      :open="showNewExpenseModal"
+      @close="showNewExpenseModal = false"
+      @submit="handleExpenseSubmit"
+    />
   </DashboardLayout>
 </template>

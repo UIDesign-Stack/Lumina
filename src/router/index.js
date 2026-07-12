@@ -107,6 +107,16 @@ const routes = [
     component: () => import('@/views/Pengaturan/Pengaturan.vue'),
   },
   {
+    path: '/profil',
+    name: 'profil-saya',
+    component: () => import('@/Components/Settings/ProfilSaya.vue'), // sesuaikan path
+  },
+  {
+    path: '/pengaturan-akun',
+    name: 'pengaturan-akun',
+    component: () => import('@/Components/Settings/PengaturanAkun.vue'), // sesuaikan path
+  },
+  {
     path: '/settings/integrations',
     name: 'Integration',
     component: () => import('@/views/Integration/Integration.vue'),

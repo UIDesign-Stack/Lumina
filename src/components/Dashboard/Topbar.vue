@@ -217,24 +217,26 @@ const notifications = [
           </div>
           <ul class="py-2">
             <li>
-              <a
-                href="#"
+              <router-link
+                to="/profil"
                 class="flex items-center gap-3 px-4 py-2.5 text-sm transition"
                 :class="isDark ? 'text-gray-300 hover:bg-white/5 hover:text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'"
+                @click="userMenuOpen = false"
               >
                 <UserCircleIcon class="w-4 h-4" />
                 Profil Saya
-              </a>
+              </router-link>
             </li>
             <li>
-              <a
-                href="#"
+              <router-link
+                to="/pengaturan-akun"
                 class="flex items-center gap-3 px-4 py-2.5 text-sm transition"
                 :class="isDark ? 'text-gray-300 hover:bg-white/5 hover:text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'"
+                @click="userMenuOpen = false"
               >
                 <Cog6ToothIcon class="w-4 h-4" />
                 Pengaturan Akun
-              </a>
+              </router-link>
             </li>
           </ul>
           <div class="border-t py-2" :class="isDark ? 'border-white/5' : 'border-gray-100'">

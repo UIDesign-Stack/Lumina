@@ -9,6 +9,7 @@ import AccountSettingsCard from '@/components/Settings/AccountSettingsCard.vue'
 import TaxSettingsCard from '@/components/Settings/TaxSettingsCard.vue'
 import NotificationSettingsCard from '@/components/Settings/NotificationSettingsCard.vue'
 import SecurityPolicyCard from '@/components/Settings/SecurityPolicyCard.vue'
+import ExportDataCard from '@/components/Settings/ExportDataCard.vue'
 import AccountInfoCard from '@/components/Settings/AccountInfoCard.vue'
 import AboutAppCard from '@/components/Settings/AboutAppCard.vue'
 import QuickActionsCard from '@/components/Settings/QuickActionsCard.vue'
@@ -35,6 +36,9 @@ const {
   masaBerlakuSandiOptions,
   durasiKunciOptions,
   waktuLogoutOptions,
+  exportDataOptions,
+  exportSettings,
+  exportHistory,
   accountInfo,
   aboutApp,
   quickActions,
@@ -58,6 +62,7 @@ const defaults = {
   digestFrequency: digestFrequency.value,
   quietHours: JSON.parse(JSON.stringify(quietHours.value)),
   securityPolicy: JSON.parse(JSON.stringify(securityPolicy.value)),
+  exportSettings: JSON.parse(JSON.stringify(exportSettings.value)),
 }
 
 const feedback = ref(null) // { type: 'success' | 'error', message: string }
@@ -185,6 +190,22 @@ function handleClearCache() {
   showFeedback('success', 'Cache berhasil dibersihkan.')
 }
 
+function handleExportData(payload) {
+  // TODO: kirim payload ini ke API untuk memproses ekspor data sesungguhnya (transaksi, laporan, dll)
+  console.log('Ekspor data:', payload)
+
+  // Simulasi entri baru di riwayat ekspor (client-side saja)
+  exportHistory.value.unshift({
+    id: Date.now(),
+    label: exportDataOptions.filter((o) => payload.selectedData.includes(o.key)).map((o) => o.label).join(', '),
+    date: new Date().toLocaleString('id-ID', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+    format: payload.format === 'pdf' ? 'PDF' : payload.format === 'excel' ? 'Excel' : 'CSV',
+    size: '- ',
+  })
+
+  showFeedback('success', 'Ekspor data berhasil diproses dan ditambahkan ke riwayat.')
+}
+
 function confirmReset() {
   generalPreferences.value = JSON.parse(JSON.stringify(defaults.generalPreferences))
   displaySettings.value = JSON.parse(JSON.stringify(defaults.displaySettings))
@@ -197,6 +218,7 @@ function confirmReset() {
   digestFrequency.value = defaults.digestFrequency
   quietHours.value = JSON.parse(JSON.stringify(defaults.quietHours))
   securityPolicy.value = JSON.parse(JSON.stringify(defaults.securityPolicy))
+  exportSettings.value = JSON.parse(JSON.stringify(defaults.exportSettings))
   // TODO: kirim reset ke API supaya tersimpan permanen, bukan hanya lokal
   showResetConfirm.value = false
   showFeedback('success', 'Pengaturan berhasil dikembalikan ke default.')
@@ -285,6 +307,16 @@ function confirmReset() {
             :masa-berlaku-sandi-options="masaBerlakuSandiOptions"
             :durasi-kunci-options="durasiKunciOptions"
             :waktu-logout-options="waktuLogoutOptions"
+          />
+        </template>
+
+        <!-- Tab: Ekspor Data -->
+        <template v-else-if="activeTab === 'Ekspor Data'">
+          <ExportDataCard
+            :settings="exportSettings"
+            :data-options="exportDataOptions"
+            :history="exportHistory"
+            @export="handleExportData"
           />
         </template>
 

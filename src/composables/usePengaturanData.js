@@ -119,7 +119,30 @@ export function usePengaturanData() {
     selesai: '07:00',
   })
 
-  // Kebijakan Keamanan Perusahaan (tab "Keamanan")
+  // Ekspor Data (tab "Ekspor Data")
+  const exportDataOptions = [
+    { key: 'transaksi', label: 'Transaksi' },
+    { key: 'bukuBesar', label: 'Buku Besar' },
+    { key: 'laporanKeuangan', label: 'Laporan Keuangan (Laba Rugi, Neraca, Arus Kas)' },
+    { key: 'dataPengguna', label: 'Data Pengguna & Peran' },
+    { key: 'logAktivitas', label: 'Log Aktivitas (Audit Log)' },
+  ]
+
+  const exportSettings = ref({
+    selectedData: ['transaksi', 'laporanKeuangan'],
+    tanggalMulai: '',
+    tanggalAkhir: '',
+    format: 'excel',
+    sertakanLampiran: false,
+  })
+
+  // TODO: ganti dengan riwayat ekspor asli dari API
+  const exportHistory = ref([
+    { id: 1, label: 'Transaksi & Laporan Keuangan', date: '10 Juli 2026, 14:20', format: 'Excel', size: '2.4 MB' },
+    { id: 2, label: 'Buku Besar', date: '02 Juli 2026, 09:05', format: 'PDF', size: '1.1 MB' },
+    { id: 3, label: 'Data Pengguna & Peran', date: '25 Juni 2026, 16:42', format: 'CSV', size: '84 KB' },
+  ])
+
   const securityPolicy = ref({
     wajib2FA: false,
     panjangMinimalSandi: '8',
@@ -148,9 +171,9 @@ export function usePengaturanData() {
   })
 
   const accountInfo = {
-    name: 'FajarDev',
+    name: 'Fajar Ardiansyah',
     role: 'Finance Manager',
-    email: 'fajar.Dev@lumina.id',
+    email: 'fajar.ardiansyah@lumina.id',
     avatar: '',
   }
 
@@ -185,6 +208,9 @@ export function usePengaturanData() {
     masaBerlakuSandiOptions,
     durasiKunciOptions,
     waktuLogoutOptions,
+    exportDataOptions,
+    exportSettings,
+    exportHistory,
     accountInfo,
     aboutApp,
     quickActions,

@@ -45,7 +45,7 @@ const {
 } = usePengaturanData()
 
 const { isDark, setTheme } = useTheme()
-const { setTooltipsEnabled, setPageAnimationsEnabled, tooltipsEnabled, pageAnimationsEnabled } = useUIPreferences()
+const { setTooltipsEnabled, setPageAnimationsEnabled, tooltipsEnabled, pageAnimationsEnabled, setSidebarCollapsed, sidebarCollapsed } = useUIPreferences()
 
 const activeTab = ref(tabs[0])
 
@@ -111,6 +111,24 @@ watch(
     setPageAnimationsEnabled(enabled)
   }
 )
+
+// --- Sinkronisasi toggle "Sidebar Ringkas" ---
+const sidebarSetting = displaySettings.value.find((s) => s.key === 'compactSidebar')
+if (sidebarSetting) sidebarSetting.enabled = sidebarCollapsed.value
+
+watch(
+  () => displaySettings.value.find((s) => s.key === 'compactSidebar')?.enabled,
+  (enabled) => {
+    if (enabled === undefined) return
+    setSidebarCollapsed(enabled)
+  }
+)
+
+// Saat sidebar di-collapse/expand dari tempat lain (misal chevron di Sidebar.vue) -> sinkronkan toggle di sini
+watch(sidebarCollapsed, (value) => {
+  const setting = displaySettings.value.find((s) => s.key === 'compactSidebar')
+  if (setting && setting.enabled !== value) setting.enabled = value
+})
 
 function showFeedback(type, message) {
   feedback.value = { type, message }

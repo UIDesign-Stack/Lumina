@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import { useUIPreferences } from '@/composables/useUIPreferences'
 import { useTheme } from '@/composables/useTheme'
 
@@ -17,35 +17,73 @@ const props = defineProps({
 
 const { tooltipsEnabled } = useUIPreferences()
 const { isDark } = useTheme()
-const visible = ref(false)
 
-const positionClass = {
-  top: 'bottom-full left-1/2 -translate-x-1/2 mb-2',
-  bottom: 'top-full left-1/2 -translate-x-1/2 mt-2',
-  left: 'right-full top-1/2 -translate-y-1/2 mr-2',
-  right: 'left-full top-1/2 -translate-y-1/2 ml-2',
+const visible = ref(false)
+const triggerRef = ref(null)
+const coords = ref({ top: 0, left: 0 })
+
+const GAP = 8
+
+async function showTooltip() {
+  if (!props.text) return
+  visible.value = true
+  await nextTick()
+  positionTooltip()
+}
+
+function hideTooltip() {
+  visible.value = false
+}
+
+function positionTooltip() {
+  const el = triggerRef.value
+  if (!el) return
+  const rect = el.getBoundingClientRect()
+
+  if (props.position === 'right') {
+    coords.value = { top: rect.top + rect.height / 2, left: rect.right + GAP }
+  } else if (props.position === 'left') {
+    coords.value = { top: rect.top + rect.height / 2, left: rect.left - GAP }
+  } else if (props.position === 'bottom') {
+    coords.value = { top: rect.bottom + GAP, left: rect.left + rect.width / 2 }
+  } else {
+    coords.value = { top: rect.top - GAP, left: rect.left + rect.width / 2 }
+  }
+}
+
+const transformStyle = {
+  top: 'translate(-50%, -100%)',
+  bottom: 'translate(-50%, 0)',
+  left: 'translate(-100%, -50%)',
+  right: 'translate(0, -50%)',
 }
 </script>
 
 <template>
   <span
+    ref="triggerRef"
     class="relative inline-flex"
-    @mouseenter="visible = true"
-    @mouseleave="visible = false"
-    @focusin="visible = true"
-    @focusout="visible = false"
+    v-bind="$attrs"
+    @mouseenter="showTooltip"
+    @mouseleave="hideTooltip"
+    @focusin="showTooltip"
+    @focusout="hideTooltip"
   >
     <slot />
+  </span>
 
+  <Teleport to="body">
     <span
-      v-if="tooltipsEnabled && visible"
-      class="absolute z-50 whitespace-nowrap px-2.5 py-1.5 rounded-lg text-xs font-medium shadow-lg pointer-events-none"
-      :class="[
-        positionClass[position] || positionClass.top,
-        isDark ? 'bg-[#181428] text-gray-100 border border-white/10' : 'bg-gray-900 text-white',
-      ]"
+      v-if="tooltipsEnabled && visible && text"
+      class="fixed z-[9999] whitespace-nowrap px-2.5 py-1.5 rounded-lg text-xs font-medium shadow-lg pointer-events-none"
+      :style="{
+        top: coords.top + 'px',
+        left: coords.left + 'px',
+        transform: transformStyle[position] || transformStyle.top,
+      }"
+      :class="isDark ? 'bg-[#181428] text-gray-100 border border-white/10' : 'bg-gray-900 text-white'"
     >
       {{ text }}
     </span>
-  </span>
+  </Teleport>
 </template>
